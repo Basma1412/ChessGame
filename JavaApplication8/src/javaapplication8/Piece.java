@@ -9,6 +9,8 @@ public abstract class Piece {
     protected int y;
     protected int piecenumber;
     protected String image;
+    
+    protected boolean userOwnership;
 
     public void setColor(String color) {
         col = color;
@@ -18,6 +20,11 @@ public abstract class Piece {
     }
     
     
+    public void setPieceToUser()
+    {
+        this.userOwnership =true;
+    }
+    
     public String getImage()
     {
         return this.image;
@@ -26,6 +33,7 @@ public abstract class Piece {
     public Piece ()
     {
         
+        this.userOwnership =false;
     }
 
     public Piece(int piecenumber, int x, int y, String image) {
@@ -33,6 +41,8 @@ public abstract class Piece {
         this.y = y;
         this.piecenumber = piecenumber;
         this.image = image;
+        
+        this.userOwnership =false;
     }
 
     

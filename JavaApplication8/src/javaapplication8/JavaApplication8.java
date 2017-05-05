@@ -47,7 +47,7 @@ class Board extends JFrame {
     }
 
     public void setGame() {
-        panl.setLocationPlayGame();
+        panl.playGame();
 
     }
 }
