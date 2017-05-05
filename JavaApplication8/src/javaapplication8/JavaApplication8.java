@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
 import javax.swing.*;
+
 class Board extends JFrame {
 
     public JButton[][] box = new JButton[8][8];
@@ -22,7 +23,9 @@ class Board extends JFrame {
 
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(750, 750);
+        this.setSize(1000, 1000);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         Container c = this.getContentPane();
 
         panl = new Square(Col);
@@ -35,7 +38,9 @@ class Board extends JFrame {
 
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(750, 750);
+        this.setSize(1000, 1000);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         Container c = this.getContentPane();
         panl = new Square();
         c.add(panl);
