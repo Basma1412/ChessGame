@@ -71,7 +71,6 @@ class Square extends JPanel {
 
     public JButton[][] sqaures = new JButton[8][8];
 
-
     public void getSquare(Location oldLocation, Location newLocation) {
 
         int iold = oldLocation.getI();
@@ -83,8 +82,6 @@ class Square extends JPanel {
         sqaures[inew][jnew].setIcon(old);
 
     }
-
-
 
     public void setPiece(JButton square, Piece piece) {
         square.setIcon(new ImageIcon(piece.getImage()));
@@ -124,7 +121,6 @@ class Square extends JPanel {
 
         setWhitePieces(whitePieces);
         setBlackPieces(blackPieces);
-
 
         int counter1 = 0;
         int counter2 = 0;
@@ -291,7 +287,11 @@ class Square extends JPanel {
 
     static boolean machineTurn = false;
 
-    public void setLocationPlayGame() {
+    public void playComputer() {
+
+    }
+
+    public void playUser() {
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -303,24 +303,6 @@ class Square extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        machineTurn = false;
-
-                        Random randomGenerator = new Random();
-                        int ii = randomGenerator.nextInt(8);
-
-                        Random randomGenerator2 = new Random();
-                        int jj = randomGenerator.nextInt(2);
-
-                        Random randomGenerator3 = new Random();
-                        int ii2 = randomGenerator.nextInt(8);
-
-                        Random randomGenerator4 = new Random();
-                        int jj2 = randomGenerator.nextInt(8);
-
-                        machineTurn = true;
-
-                        Location l;
-                        l = new Location(a, b);
                         if (old == false) {
                             temp = sqaures[a][b].getIcon();
                             nIcon = temp;
@@ -331,21 +313,138 @@ class Square extends JPanel {
                             sqaures[a][b].setIcon(null);
                             sqaures[a][b].setIcon(nIcon);
                             old = false;
-
                         }
-
-                        temp = sqaures[jj][ii].getIcon();
-                        sqaures[jj][ii].setIcon(null);
-                        sqaures[ii2][jj2].setIcon(null);
-                        sqaures[ii2][jj2].setIcon(temp);
-
                     }
                 });
             }
 
         }
+
     }
 
+    public void setLocationPlayGame() {
+
+        if (machineTurn) {
+            playComputer();
+            playUser();
+            machineTurn = false;
+        } else {
+            playUser();
+            playComputer();
+            machineTurn = true;
+
+        }
+
+//        for (int i = 0; i < 8; i++) {
+//            for (int j = 0; j < 8; j++) {
+//                final int a = i;
+//                final int b = j;
+//
+//                sqaures[a][b].addActionListener(new ActionListener() {
+//
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//
+//                        machineTurn = false;
+//
+//                        Random randomGenerator = new Random();
+//                        int ii = randomGenerator.nextInt(8);
+//
+//                        Random randomGenerator2 = new Random();
+//                        int jj = randomGenerator.nextInt(2);
+//
+//                        Random randomGenerator3 = new Random();
+//                        int ii2 = randomGenerator.nextInt(8);
+//
+//                        Random randomGenerator4 = new Random();
+//                        int jj2 = randomGenerator.nextInt(8);
+//
+//                        machineTurn = true;
+//
+//                        Location l;
+//                        l = new Location(a, b);
+//                        if (old == false) {
+//                            temp = sqaures[a][b].getIcon();
+//                            nIcon = temp;
+//                            sqaures[a][b].setIcon(null);
+//                            old = true;
+//                        } 
+//                        else {
+//
+//                            sqaures[a][b].setIcon(null);
+//                            sqaures[a][b].setIcon(nIcon);
+//                            old = false;
+//
+//                        }
+//
+//                        temp = sqaures[jj][ii].getIcon();
+//                        sqaures[jj][ii].setIcon(null);
+//                        sqaures[ii2][jj2].setIcon(null);
+//                        sqaures[ii2][jj2].setIcon(temp);
+//
+//                    }
+//                });
+//            }
+//
+//        }
+    }
+
+//    
+//    public void setLocationPlayGame() {
+//
+//        for (int i = 0; i < 8; i++) {
+//            for (int j = 0; j < 8; j++) {
+//                final int a = i;
+//                final int b = j;
+//
+//                sqaures[a][b].addActionListener(new ActionListener() {
+//
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//
+//                        machineTurn = false;
+//
+//                        Random randomGenerator = new Random();
+//                        int ii = randomGenerator.nextInt(8);
+//
+//                        Random randomGenerator2 = new Random();
+//                        int jj = randomGenerator.nextInt(2);
+//
+//                        Random randomGenerator3 = new Random();
+//                        int ii2 = randomGenerator.nextInt(8);
+//
+//                        Random randomGenerator4 = new Random();
+//                        int jj2 = randomGenerator.nextInt(8);
+//
+//                        machineTurn = true;
+//
+//                        Location l;
+//                        l = new Location(a, b);
+//                        if (old == false) {
+//                            temp = sqaures[a][b].getIcon();
+//                            nIcon = temp;
+//                            sqaures[a][b].setIcon(null);
+//                            old = true;
+//                        } 
+//                        else {
+//
+//                            sqaures[a][b].setIcon(null);
+//                            sqaures[a][b].setIcon(nIcon);
+//                            old = false;
+//
+//                        }
+//
+//                        temp = sqaures[jj][ii].getIcon();
+//                        sqaures[jj][ii].setIcon(null);
+//                        sqaures[ii2][jj2].setIcon(null);
+//                        sqaures[ii2][jj2].setIcon(temp);
+//
+//                    }
+//                });
+//            }
+//
+//        }
+//    }
     public void td() {
 
         setLocationPlayGame();
