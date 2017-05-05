@@ -13,7 +13,7 @@ public class Controller {
     }
     
     public void viewGame(String Game){
-        Square square = new Square();
+        SquarePanel square = new SquarePanel();
         Board bb = new Board();
         bb.setVisible(true);
     }

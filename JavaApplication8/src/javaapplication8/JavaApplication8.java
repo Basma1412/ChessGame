@@ -6,7 +6,7 @@ import javax.swing.*;
 class Board extends JFrame {
 
     public JButton[][] box = new JButton[8][8];
-    Square panl;
+    SquarePanel panl;
     Player pp;
 
     public Board(String Col) {
@@ -18,7 +18,7 @@ class Board extends JFrame {
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         Container c = this.getContentPane();
 
-        panl = new Square(Col);
+        panl = new SquarePanel(Col);
 
         c.add(panl);
 
@@ -32,7 +32,7 @@ class Board extends JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         Container c = this.getContentPane();
-        panl = new Square();
+        panl = new SquarePanel();
         c.add(panl);
     }
 

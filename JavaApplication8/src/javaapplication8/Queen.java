@@ -31,7 +31,7 @@ public class Queen extends Piece {
     
     
     @Override
-    public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
+    public ArrayList<SquarePanel> getValidMoves(SquarePanel[][] squares, Location current_location) {
 
         int x = current_location.getI();
         int y = current_location.getJ();
@@ -42,7 +42,7 @@ public class Queen extends Piece {
         int up = x - 1;
         int down = x + 1;
 
-        ArrayList<Square> valid_moves = new ArrayList<>();
+        ArrayList<SquarePanel> valid_moves = new ArrayList<>();
 //left
         for (int a = y; a < maxY; a++) {
             valid_moves.add(squares[x][a]);
