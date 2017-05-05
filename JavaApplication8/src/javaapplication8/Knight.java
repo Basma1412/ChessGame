@@ -5,14 +5,30 @@
  */
 package javaapplication8;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Basma Mohamed
  */
 public class Knight  extends Piece{
 
-    public Knight(int piecenumber, int x, int y, String image) {
-        super(piecenumber, x, y, image);
+    public void setBlack()
+    {
+        this.image="..\\pictures\\black\\knight.png";
+    }
+    
+    
+    
+    public void setWhite()
+    {
+        this.image="..\\pictures\\white\\knight.png";
+    }
+    
+    
+    @Override
+    public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

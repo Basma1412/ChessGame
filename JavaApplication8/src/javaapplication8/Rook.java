@@ -5,14 +5,31 @@
  */
 package javaapplication8;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Basma Mohamed
  */
 public class Rook  extends Piece {
 
-    public Rook(int piecenumber, int x, int y, String image) {
-        super(piecenumber, x, y, image);
+    
+    public void setBlack()
+    {
+        this.image="..\\pictures\\black\\rook.png";
+    }
+    
+    
+    
+    public void setWhite()
+    {
+        this.image="..\\pictures\\white\\rook.png";
+    }
+    
+
+    @Override
+    public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

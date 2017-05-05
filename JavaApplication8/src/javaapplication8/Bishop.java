@@ -13,10 +13,19 @@ import java.util.ArrayList;
  */
 public class Bishop  extends Piece{
 
-    public Bishop(int piecenumber, int x, int y, String image) {
-        super(piecenumber, x, y, image);
-    }
  
+    
+    public void setBlack()
+    {
+        this.image="..\\pictures\\black\\bishop.png";
+    }
+    
+    
+    
+    public void setWhite()
+    {
+        this.image="..\\pictures\\white\\bishop.png";
+    }
     
     
     @Override

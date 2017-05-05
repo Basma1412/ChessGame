@@ -1,17 +1,10 @@
 package javaapplication8;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Random;
-import javax.swing.*;
 
 class Location {
 
@@ -34,10 +27,50 @@ class Location {
 
 class Square extends JPanel {
 
+    public void setWhitePieces(Piece[] whitePieces) {
+        whitePieces[0] = new Rook();
+        whitePieces[1] = new Knight();
+        whitePieces[2] = new Bishop();
+        whitePieces[3] = new King();
+        whitePieces[4] = new Queen();
+        whitePieces[5] = new Bishop();
+        whitePieces[6] = new Knight();
+        whitePieces[7] = new Rook();
+
+        for (int i = 8; i < 16; i++) {
+
+            whitePieces[i] = new Pawn();
+        }
+
+        for (int i = 0; i < 16; i++) {
+            whitePieces[i].setWhite();
+        }
+
+    }
+
+    public void setBlackPieces(Piece[] blackPieces) {
+        blackPieces[0] = new Rook();
+        blackPieces[1] = new Knight();
+        blackPieces[2] = new Bishop();
+        blackPieces[3] = new King();
+        blackPieces[4] = new Queen();
+        blackPieces[5] = new Bishop();
+        blackPieces[6] = new Knight();
+        blackPieces[7] = new Rook();
+
+        for (int i = 8; i < 16; i++) {
+
+            blackPieces[i] = new Pawn();
+        }
+
+        for (int i = 0; i < 16; i++) {
+            blackPieces[i].setBlack();
+        }
+
+    }
+
     public JButton[][] sqaures = new JButton[8][8];
 
-    ImageIcon[] WhitePieces = new ImageIcon[6];
-    ImageIcon[] BlackPieces = new ImageIcon[6];
 
     public void getSquare(Location oldLocation, Location newLocation) {
 
@@ -51,26 +84,12 @@ class Square extends JPanel {
 
     }
 
-    public void setBlackPiece() {
-        BlackPieces[0] = new ImageIcon(("..\\pictures\\white\\pieces_8.png"));
-        BlackPieces[1] = new ImageIcon(("..\\pictures\\white\\pieces_9.png"));
-        BlackPieces[2] = new ImageIcon(("..\\pictures\\white\\pieces_10.png"));
-        BlackPieces[3] = new ImageIcon(("..\\pictures\\white\\pieces_11.png"));
-        BlackPieces[5] = new ImageIcon(("..\\pictures\\white\\pieces_12.png"));
-        BlackPieces[4] = new ImageIcon(("..\\pictures\\white\\pieces_13.png"));
+
+
+    public void setPiece(JButton square, Piece piece) {
+        square.setIcon(new ImageIcon(piece.getImage()));
     }
 
-    public void setWhitePiece() {
-        WhitePieces[0] = new ImageIcon(("..\\pictures\\white\\pieces_2.png"));
-        WhitePieces[1] = new ImageIcon(("..\\pictures\\white\\pieces_3.png"));
-        WhitePieces[2] = new ImageIcon(("..\\pictures\\white\\pieces_4.png"));
-        WhitePieces[3] = new ImageIcon(("..\\pictures\\white\\pieces_5.png"));
-        WhitePieces[4] = new ImageIcon(("..\\pictures\\white\\pieces_6.png"));
-        WhitePieces[5] = new ImageIcon(("..\\pictures\\white\\pieces_7.png"));
-    }
-
-    
-    
     public void resetBoard(String Col) {
         this.Col = Col;
         int cnt = 0;
@@ -100,46 +119,59 @@ class Square extends JPanel {
             }
         }
 
-        setWhitePiece();
-        setBlackPiece();
+        Piece[] whitePieces = new Piece[16];
+        Piece[] blackPieces = new Piece[16];
 
+        setWhitePieces(whitePieces);
+        setBlackPieces(blackPieces);
+
+
+        int counter1 = 0;
+        int counter2 = 0;
         if (Col.equalsIgnoreCase("White")) {
-            // button.setIcon(new ImageIcon(img));
 
             for (int i = 0; i < 1; i++) {
                 for (int j = 0; j < 5; j++) {
-                    sqaures[i][j].setIcon((BlackPieces[j]));
+
+                    setPiece(sqaures[i][j], blackPieces[counter1++]);
 
                 }
             }
-            
 
             for (int i = 0; i < 1; i++) {
                 for (int j = 7; j > 4; j--) {
-                    sqaures[0][j].setIcon(BlackPieces[7 - j]);
+                    setPiece(sqaures[0][j], blackPieces[counter1++]);
+
                 }
             }
             for (int i = 0; i < 1; i++) {
                 for (int j = 0; j < 8; j++) {
-                    sqaures[1][j].setIcon(BlackPieces[5]);
+                    setPiece(sqaures[1][j], blackPieces[counter1++]);
+
                 }
             }
 
             for (int i = 6; i < 7; i++) {
                 for (int j = 0; j < 8; j++) {
-                    sqaures[i][j].setIcon(WhitePieces[5]);
+
+                    setPiece(sqaures[i][j], whitePieces[counter2++]);
+
                 }
             }
 
             for (int i = 7; i < 8; i++) {
                 for (int j = 0; j < 5; j++) {
-                    sqaures[i][j].setIcon(WhitePieces[j]);
+
+                    setPiece(sqaures[i][j], whitePieces[counter2++]);
+
                 }
             }
 
             for (int i = 7; i < 8; i++) {
                 for (int j = 7; j > 4; j--) {
-                    sqaures[i][j].setIcon(WhitePieces[7 - j]);
+
+                    setPiece(sqaures[i][j], whitePieces[counter2++]);
+
                 }
             }
 
@@ -147,37 +179,46 @@ class Square extends JPanel {
 
             for (int i = 0; i < 1; i++) {
                 for (int j = 0; j < 5; j++) {
-                    sqaures[i][j].setIcon((WhitePieces[j]));
+
+                    setPiece(sqaures[i][j], whitePieces[counter2++]);
 
                 }
             }
 
             for (int i = 0; i < 1; i++) {
                 for (int j = 7; j > 4; j--) {
-                    sqaures[0][j].setIcon(WhitePieces[7 - j]);
+
+                    setPiece(sqaures[0][j], whitePieces[counter2++]);
+
                 }
             }
             for (int i = 0; i < 1; i++) {
                 for (int j = 0; j < 8; j++) {
-                    sqaures[1][j].setIcon(WhitePieces[5]);
+
+                    setPiece(sqaures[1][j], whitePieces[counter2++]);
+
                 }
             }
 
             for (int i = 6; i < 7; i++) {
                 for (int j = 0; j < 8; j++) {
-                    sqaures[i][j].setIcon(BlackPieces[5]);
+
+                    setPiece(sqaures[i][j], blackPieces[counter1++]);
+
                 }
             }
 
             for (int i = 7; i < 8; i++) {
                 for (int j = 0; j < 5; j++) {
-                    sqaures[i][j].setIcon(BlackPieces[j]);
+                    setPiece(sqaures[i][j], blackPieces[counter1++]);
+
                 }
             }
 
             for (int i = 7; i < 8; i++) {
                 for (int j = 7; j > 4; j--) {
-                    sqaures[i][j].setIcon(BlackPieces[7 - j]);
+                    setPiece(sqaures[i][j], blackPieces[counter1++]);
+
                 }
             }
 
@@ -236,8 +277,6 @@ class Square extends JPanel {
         t.start();
 
     }
-
-    
 
     public Square(String Col) {
 
