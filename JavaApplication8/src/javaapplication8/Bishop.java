@@ -29,7 +29,7 @@ public class Bishop  extends Piece{
     
     
     @Override
-    public ArrayList<SquarePanel> getValidMoves(SquarePanel[][] squares, Location current_location) {
+    public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
 
         int x = current_location.getI();
         int y = current_location.getJ();
@@ -37,7 +37,7 @@ public class Bishop  extends Piece{
         int maxX = squares[0].length;
         int maxY = squares.length;
 
-        ArrayList<SquarePanel> valid_moves = new ArrayList<>();
+        ArrayList<Square> valid_moves = new ArrayList<>();
  //diagonal up left
         for (int a = y, b = x; a < maxY && b >= 0; a++, b--) {
             valid_moves.add(squares[b][a]);

@@ -27,14 +27,14 @@ public class King extends Piece {
     }
     
     @Override
-    public ArrayList<SquarePanel> getValidMoves(SquarePanel[][] squares, Location current_location) {
+    public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
 
         int x = current_location.getI();
         int y = current_location.getJ();
 
         int maxX = squares[0].length;
         int maxY = squares.length;
-        ArrayList<SquarePanel> valid_moves = new ArrayList<>();
+        ArrayList<Square> valid_moves = new ArrayList<>();
 
         int forward = y + 1;
         int backward = y - 1;

@@ -28,7 +28,7 @@ public class Rook  extends Piece {
     
 
     @Override
-    public ArrayList<SquarePanel> getValidMoves(SquarePanel[][] squares, Location current_location) {
+    public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
         int x = current_location.getI();
         int y = current_location.getJ();
         
@@ -36,7 +36,7 @@ public class Rook  extends Piece {
         int maxY = squares.length;
 
 
-        ArrayList<SquarePanel> valid_moves = new ArrayList<>();
+        ArrayList<Square> valid_moves = new ArrayList<>();
 //left
         for (int i = y; i < maxY; i++) {
             valid_moves.add(squares[x][i]);

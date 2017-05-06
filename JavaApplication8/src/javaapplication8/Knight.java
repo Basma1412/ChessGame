@@ -27,7 +27,7 @@ public class Knight  extends Piece{
     
     
     @Override
-    public ArrayList<SquarePanel> getValidMoves(SquarePanel[][] squares, Location current_location) {
+    public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
        int x = current_location.getI();
         int y = current_location.getJ();
         
@@ -35,7 +35,7 @@ public class Knight  extends Piece{
         int maxY = squares.length;
 
 
-        ArrayList<SquarePanel> valid_moves = new ArrayList<>();
+        ArrayList<Square> valid_moves = new ArrayList<>();
 
         int Xrightup = x-1;
         int Yrightup = y+2;
@@ -64,25 +64,25 @@ public class Knight  extends Piece{
         if (Xrightup>0 && Xrightup<maxX && Yrightup>0 && Yrightup<maxY){
             valid_moves.add(squares[Xrightup][Yrightup]);
         }
-        else if (Xleftup>0 && Xleftup<maxX && Yleftup>0 && Yleftup<maxY){
+         if (Xleftup>0 && Xleftup<maxX && Yleftup>0 && Yleftup<maxY){
             valid_moves.add(squares[Xleftup][Yleftup]);
         }
-        else if (Xupright>0 && Xupright<maxX && Yupright>0 && Yupright<maxY){
+         if (Xupright>0 && Xupright<maxX && Yupright>0 && Yupright<maxY){
             valid_moves.add(squares[Xupright][Yupright]);
         }
-        else if (Xupleft>0 && Xupleft<maxX && Yupleft>0 && Yupleft<maxY){
+         if (Xupleft>0 && Xupleft<maxX && Yupleft>0 && Yupleft<maxY){
             valid_moves.add(squares[Xupleft][Yupleft]);
         }
-        else if (Xrightdown>0 && Xrightdown<maxX && Yrightdown>0 && Yrightdown<maxY){
+         if (Xrightdown>0 && Xrightdown<maxX && Yrightdown>0 && Yrightdown<maxY){
             valid_moves.add(squares[Xrightdown][Yrightdown]);
         }
-        else if (Xleftdown>0 && Xleftdown<maxX && Yleftdown>0 && Yleftdown<maxY){
+         if (Xleftdown>0 && Xleftdown<maxX && Yleftdown>0 && Yleftdown<maxY){
             valid_moves.add(squares[Xleftdown][Yleftdown]);
         }
-        else if (Xdownright>0 && Xdownright<maxX && Ydownright>0 && Ydownright<maxY){
+         if (Xdownright>0 && Xdownright<maxX && Ydownright>0 && Ydownright<maxY){
             valid_moves.add(squares[Xdownright][Ydownright]);
         }
-        else if (Xdownleft>0 && Xdownleft<maxX && Ydownleft>0 && Ydownleft<maxY){
+         if (Xdownleft>0 && Xdownleft<maxX && Ydownleft>0 && Ydownleft<maxY){
             valid_moves.add(squares[Xdownleft][Ydownleft]);
         }
         

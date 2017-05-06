@@ -24,17 +24,7 @@ class Board extends JFrame {
 
     }
 
-    public Board() {
-
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000, 1000);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-        Container c = this.getContentPane();
-        panl = new SquarePanel();
-        c.add(panl);
-    }
+   
 
     public void setBoard(String col) {
         Board ss = new Board(col);

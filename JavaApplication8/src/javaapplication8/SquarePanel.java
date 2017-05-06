@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Random;
 
 class Location {
@@ -47,6 +48,8 @@ class SquarePanel extends JPanel {
     static Piece temp;
     Square originSquare;
     static boolean machineTurn = false;
+    ArrayList<Square> validMoves;
+    boolean valid = false;
 
     public void setWhitePieces(Piece[] whitePieces) {
         whitePieces[0] = new Rook();
@@ -147,7 +150,7 @@ class SquarePanel extends JPanel {
         setBlackPieces(blackPieces);
 
         int counter1 = 0;
-        int counter2 = 0;
+        int counter2 = 15;
         if (Col.equalsIgnoreCase("White")) {
 
             for (int i = 0; i < 1; i++) {
@@ -175,7 +178,7 @@ class SquarePanel extends JPanel {
                 for (int j = 0; j < 8; j++) {
 
                     whitePieces[counter2].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
+                    setPieceOnSquare(squares[i][j], whitePieces[counter2--]);
 
                 }
             }
@@ -184,7 +187,7 @@ class SquarePanel extends JPanel {
                 for (int j = 0; j < 5; j++) {
 
                     whitePieces[counter2].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
+                    setPieceOnSquare(squares[i][j], whitePieces[counter2--]);
 
                 }
             }
@@ -193,13 +196,15 @@ class SquarePanel extends JPanel {
                 for (int j = 7; j > 4; j--) {
 
                     whitePieces[counter2].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
+                    setPieceOnSquare(squares[i][j], whitePieces[counter2--]);
 
                 }
             }
 
         } else {
 
+            counter1 = 15;
+            counter2 = 0;
             for (int i = 0; i < 1; i++) {
                 for (int j = 0; j < 5; j++) {
 
@@ -227,7 +232,7 @@ class SquarePanel extends JPanel {
                 for (int j = 0; j < 8; j++) {
 
                     blackPieces[counter1].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], blackPieces[counter1++]);
+                    setPieceOnSquare(squares[i][j], blackPieces[counter1--]);
 
                 }
             }
@@ -236,7 +241,7 @@ class SquarePanel extends JPanel {
                 for (int j = 0; j < 5; j++) {
 
                     blackPieces[counter1].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], blackPieces[counter1++]);
+                    setPieceOnSquare(squares[i][j], blackPieces[counter1--]);
 
                 }
             }
@@ -246,7 +251,7 @@ class SquarePanel extends JPanel {
                 for (int j = 7; j > 4; j--) {
 
                     blackPieces[counter1].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], blackPieces[counter1++]);
+                    setPieceOnSquare(squares[i][j], blackPieces[counter1--]);
 
                 }
             }
@@ -262,53 +267,10 @@ class SquarePanel extends JPanel {
         squares[iold][jold].setIcon(null);
     }
 
-    public void setLocationViewGame() {
-        final Timer t = new Timer(500, null);
-        t.addActionListener(new ActionListener() {
-            int i = 0;
-
-            public void actionPerformed(ActionEvent e) {
-
-                if (i > 10) {
-                    t.stop();
-                }
-
-                Random rn = new Random();
-                int range = 8;
-                int rN = rn.nextInt(range) + 0;
-                Random rn2 = new Random();
-                int rN2 = rn2.nextInt(range) + 0;
-
-                temp = squares[rN][rN2].getPiece();
-                squares[rN][rN2].setIcon(null);
-
-                Random rn3 = new Random();
-
-                int rN3 = rn3.nextInt(range);
-                Random rn4 = new Random();
-                int rN4 = rn2.nextInt(range);
-
-                squares[rN3][rN4].setIcon(null);
-                squares[rN3][rN4].setPiece(temp);
-
-                i++;
-            }
-
-        });
-        t.setRepeats(true);
-        t.start();
-
-    }
-
     public SquarePanel(String Col) {
 
         resetBoard(Col);
 
-    }
-
-    public SquarePanel() {
-        resetBoard("White");
-        setLocationViewGame();
     }
 
     public void playComputer() {
@@ -321,7 +283,7 @@ class SquarePanel extends JPanel {
             for (int j = 0; j < 8; j++) {
                 final int a = i;
                 final int b = j;
-
+                valid = false;
                 squares[a][b].addActionListener(new ActionListener() {
 
                     @Override
@@ -337,9 +299,10 @@ class SquarePanel extends JPanel {
                             if (userPiece) {
                                 temp = squares[a][b].getPiece();
                                 nIcon = temp;
-                                originSquare=squares[a][b];
+                                originSquare = squares[a][b];
                                 setPieceOnSquare(squares[a][b], null);
                                 old = true;
+                                validMoves = nIcon.getValidMoves(squares, new Location(a, b));
                             }
                         } else {
                             boolean userPiece2 = false;
@@ -348,12 +311,28 @@ class SquarePanel extends JPanel {
                                 userPiece2 = piece2onSquare.userOwnership;
                             }
                             if (!userPiece2) {
-                                setPieceOnSquare(squares[a][b], null);
-                                setPieceOnSquare(squares[a][b], nIcon);
-                            }
-                            else 
-                            {
-                               setPieceOnSquare(originSquare, nIcon);   
+
+                                for (Square validMove : validMoves) {
+                                    if (squares[a][b].equals(validMove)) {
+                                        setPieceOnSquare(squares[a][b], null);
+                                        setPieceOnSquare(squares[a][b], nIcon);
+                                        valid = true;
+                                        break;
+                                    }
+
+                                }
+
+                                if (!valid) {
+                                    setPieceOnSquare(originSquare, nIcon);
+                                }
+
+//                                
+//                                setPieceOnSquare(squares[a][b], null);
+//                                setPieceOnSquare(squares[a][b], nIcon);
+                            } else {
+
+                                setPieceOnSquare(originSquare, nIcon);
+
                             }
 
                             old = false;

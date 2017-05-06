@@ -53,6 +53,6 @@ public abstract class Piece {
     public abstract void setBlack();
     
     
-    public abstract ArrayList<SquarePanel> getValidMoves(SquarePanel[][] squares, Location current_location);
+    public abstract ArrayList<Square> getValidMoves(Square[][] squares, Location current_location);
 
 }

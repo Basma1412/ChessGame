@@ -12,11 +12,7 @@ public class Controller {
         makeMove();
     }
     
-    public void viewGame(String Game){
-        SquarePanel square = new SquarePanel();
-        Board bb = new Board();
-        bb.setVisible(true);
-    }
+ 
     
     public void makeMove(){
         pp.takeTurns();
