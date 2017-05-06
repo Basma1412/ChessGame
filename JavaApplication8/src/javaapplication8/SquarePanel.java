@@ -45,6 +45,7 @@ class SquarePanel extends JPanel {
     static boolean old = false;
     static Piece nIcon;
     static Piece temp;
+    Square originSquare;
     static boolean machineTurn = false;
 
     public void setWhitePieces(Piece[] whitePieces) {
@@ -103,10 +104,11 @@ class SquarePanel extends JPanel {
 
     public void setPieceOnSquare(Square square, Piece piece) {
         square.setPiece(piece);
-        if (piece!=null)
-        square.setIcon(new ImageIcon(piece.getImage()));
-        else 
+        if (piece != null) {
+            square.setIcon(new ImageIcon(piece.getImage()));
+        } else {
             square.setIcon(null);
+        }
     }
 
     public void resetBoard(String Col) {
@@ -335,15 +337,25 @@ class SquarePanel extends JPanel {
                             if (userPiece) {
                                 temp = squares[a][b].getPiece();
                                 nIcon = temp;
-                                setPieceOnSquare(squares[a][b],null);
-//                                squares[a][b].setPiece(null);
+                                originSquare=squares[a][b];
+                                setPieceOnSquare(squares[a][b], null);
                                 old = true;
                             }
                         } else {
+                            boolean userPiece2 = false;
+                            Piece piece2onSquare = squares[a][b].getPiece();
+                            if (piece2onSquare != null) {
+                                userPiece2 = piece2onSquare.userOwnership;
+                            }
+                            if (!userPiece2) {
+                                setPieceOnSquare(squares[a][b], null);
+                                setPieceOnSquare(squares[a][b], nIcon);
+                            }
+                            else 
+                            {
+                               setPieceOnSquare(originSquare, nIcon);   
+                            }
 
-                                setPieceOnSquare(squares[a][b],null);
-                          
-                                setPieceOnSquare(squares[a][b],nIcon);
                             old = false;
                         }
                     }
