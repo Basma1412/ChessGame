@@ -32,7 +32,6 @@ public abstract class Piece {
     
     public Piece ()
     {
-        
         this.userOwnership =false;
     }
 

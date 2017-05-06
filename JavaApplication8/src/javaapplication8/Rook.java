@@ -29,7 +29,31 @@ public class Rook  extends Piece {
 
     @Override
     public ArrayList<SquarePanel> getValidMoves(SquarePanel[][] squares, Location current_location) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int x = current_location.getI();
+        int y = current_location.getJ();
+        
+         int maxX = squares[0].length;
+        int maxY = squares.length;
+
+
+        ArrayList<SquarePanel> valid_moves = new ArrayList<>();
+//left
+        for (int i = y; i < maxY; i++) {
+            valid_moves.add(squares[x][i]);
+        }
+//down
+        for (int a = x; a < maxX; a++) {
+            valid_moves.add(squares[a][y]);
+        }
+//up
+        for (int a = 0; a < x; a++) {
+            valid_moves.add(squares[a][y]);
+        }
+//right
+        for (int a = 0; a < y; a++) {
+            valid_moves.add(squares[x][a]);
+        }
+        return valid_moves;
     }
     
 }
