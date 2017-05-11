@@ -311,7 +311,7 @@ class SquarePanel extends JPanel {
                                 userPiece2 = piece2onSquare.userOwnership;
                             }
                             if (!userPiece2) {
-
+                                valid=false;
                                 for (Square validMove : validMoves) {
                                     if (squares[a][b].equals(validMove)) {
                                         setPieceOnSquare(squares[a][b], null);
