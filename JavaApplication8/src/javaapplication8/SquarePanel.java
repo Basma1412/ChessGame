@@ -28,7 +28,17 @@ class Location {
 
 class Square extends JButton {
 
+    int a;
+    int b;
     Piece piece;
+
+    public void setA(int a) {
+        this.a = a;
+    }
+
+    public void setB(int b) {
+        this.b = b;
+    }
 
     public void setPiece(Piece piece) {
         this.piece = piece;
@@ -196,15 +206,14 @@ class SquarePanel extends JPanel {
                     whitePieces[counter2].setPieceToUser();
                     setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
 
-              /*  }
-            }
+                    /*  }
+                     }
 
-            for (int i = 7; i < 8; i++) {
-                for (int j = 7; j > 4; j--) {
-                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("2");
-                    whitePieces[counter2].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], whitePieces[counter2--]);*/
-
+                     for (int i = 7; i < 8; i++) {
+                     for (int j = 7; j > 4; j--) {
+                     SquresWithNumbers[i][j] = whitePieces[counter2].setNum("2");
+                     whitePieces[counter2].setPieceToUser();
+                     setPieceOnSquare(squares[i][j], whitePieces[counter2--]);*/
                 }
             }
 
@@ -217,14 +226,13 @@ class SquarePanel extends JPanel {
 //                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("1");
                     setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
 
-              /*  }
-            }
+                    /*  }
+                     }
 
-            for (int i = 0; i < 1; i++) {
-                for (int j = 7; j > 4; j--) {
-                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("1");
-                    setPieceOnSquare(squares[0][j], whitePieces[counter2++]);*/
-
+                     for (int i = 0; i < 1; i++) {
+                     for (int j = 7; j > 4; j--) {
+                     SquresWithNumbers[i][j] = whitePieces[counter2].setNum("1");
+                     setPieceOnSquare(squares[0][j], whitePieces[counter2++]);*/
                 }
             }
             for (int i = 1; i < 2; i++) {
@@ -250,16 +258,15 @@ class SquarePanel extends JPanel {
                     blackPieces[counter1].setPieceToUser();
                     setPieceOnSquare(squares[i][j], blackPieces[counter1++]);
 
-                /*}
-            }
+                    /*}
+                     }
 
-            for (int i = 7; i < 8; i++) {
+                     for (int i = 7; i < 8; i++) {
 
-                for (int j = 7; j > 4; j--) {
-                    SquresWithNumbers[i][j] = blackPieces[counter1].setNum("2");
-                    blackPieces[counter1].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], blackPieces[counter1--]);*/
-
+                     for (int j = 7; j > 4; j--) {
+                     SquresWithNumbers[i][j] = blackPieces[counter1].setNum("2");
+                     blackPieces[counter1].setPieceToUser();
+                     setPieceOnSquare(squares[i][j], blackPieces[counter1--]);*/
                 }
             }
 
@@ -288,7 +295,7 @@ class SquarePanel extends JPanel {
     }
 
     public void playComputer() {
-
+        System.out.println("I am the computer");
     }
 
     public void playUser() {
@@ -298,61 +305,7 @@ class SquarePanel extends JPanel {
                 final int a = i;
                 final int b = j;
                 valid = false;
-                squares[a][b].addActionListener(new ActionListener() {
-
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-
-                        if (old == false) {
-                            boolean userPiece = false;
-                            Piece pieceonSquare = squares[a][b].getPiece();
-                            if (pieceonSquare != null) {
-                                userPiece = pieceonSquare.userOwnership;
-                            }
-
-                            if (userPiece) {
-                                temp = squares[a][b].getPiece();
-                                nIcon = temp;
-                                originSquare = squares[a][b];
-                                setPieceOnSquare(squares[a][b], null);
-                                old = true;
-                                validMoves = nIcon.getValidMoves(squares, new Location(a, b));
-                            }
-                        } else {
-                            boolean userPiece2 = false;
-                            Piece piece2onSquare = squares[a][b].getPiece();
-                            if (piece2onSquare != null) {
-                                userPiece2 = piece2onSquare.userOwnership;
-                            }
-                            if (!userPiece2) {
-                                valid=false;
-                                for (Square validMove : validMoves) {
-                                    if (squares[a][b].equals(validMove)) {
-                                        setPieceOnSquare(squares[a][b], null);
-                                        setPieceOnSquare(squares[a][b], nIcon);
-                                        valid = true;
-                                        break;
-                                    }
-
-                                }
-
-                                if (!valid) {
-                                    setPieceOnSquare(originSquare, nIcon);
-                                }
-
-//                                
-//                                setPieceOnSquare(squares[a][b], null);
-//                                setPieceOnSquare(squares[a][b], nIcon);
-                            } else {
-
-                                setPieceOnSquare(originSquare, nIcon);
-
-                            }
-
-                            old = false;
-                        }
-                    }
-                });
+                squares[a][b].addActionListener(new PieceActionListener(a, b));
             }
         }
 
@@ -373,9 +326,68 @@ class SquarePanel extends JPanel {
 
     }
 
-    public void td() {
+    public void callGame() {
 
         playGame();
     }
 
+    private class PieceActionListener implements ActionListener {
+
+        private int a;
+        private int b;
+
+        public PieceActionListener(int a, int b) {
+            this.a = a;
+            this.b = b;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+            if (old == false) {
+                boolean userPiece = false;
+                Piece pieceonSquare = squares[a][b].getPiece();
+                if (pieceonSquare != null) {
+                    userPiece = pieceonSquare.userOwnership;
+                }
+
+                if (userPiece) {
+                    temp = squares[a][b].getPiece();
+                    nIcon = temp;
+                    originSquare = squares[a][b];
+                    setPieceOnSquare(squares[a][b], null);
+                    old = true;
+                    validMoves = nIcon.getValidMoves(squares, new Location(a, b));
+                }
+            } else {
+                boolean userPiece2 = false;
+                Piece piece2onSquare = squares[a][b].getPiece();
+                if (piece2onSquare != null) {
+                    userPiece2 = piece2onSquare.userOwnership;
+                }
+                if (!userPiece2) {
+                    valid = false;
+                    for (Square validMove : validMoves) {
+                        if (squares[a][b].equals(validMove)) {
+                            setPieceOnSquare(squares[a][b], null);
+                            setPieceOnSquare(squares[a][b], nIcon);
+                            valid = true;
+                            break;
+                        }
+
+                    }
+
+                    if (!valid) {
+                        setPieceOnSquare(originSquare, nIcon);
+                    }
+
+                } else {
+
+                    setPieceOnSquare(originSquare, nIcon);
+
+                }
+
+                old = false;
+            }
+        }
+    }
 }
