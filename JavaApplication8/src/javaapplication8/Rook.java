@@ -48,27 +48,26 @@ public class Rook  extends Piece {
         for (int a = y; a < maxY; a++) {
             if ( valid(squares, x, a, userOwnership))
                 valid_moves.add(squares[x][a]);
-            else
-                break;
+          
 
         }
 //down
         for (int a = x; a < maxX; a++) {
             if (valid(squares, a, y, userOwnership))
                 valid_moves.add(squares[a][y]);
-            else break;
+           
         }
 //up
         for (int a = x; a > 0; a--) {
             if (valid(squares, a, y, userOwnership))
                 valid_moves.add(squares[a][y]);
-            else break;
+        
         }
 //right
         for (int a = 0; a < y; a++) {
             if (valid(squares, x, a, userOwnership))
                 valid_moves.add(squares[x][a]);
-            else break;
+         
         }
             return valid_moves;
 
