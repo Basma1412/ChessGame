@@ -49,7 +49,7 @@ class Square extends JButton {
     }
 }
 
-class SquarePanel extends JPanel {
+final class SquarePanel extends JPanel {
 
     public Square[][] squares = new Square[8][8];
     String Col;
@@ -65,10 +65,6 @@ class SquarePanel extends JPanel {
 
     public static void setActive(boolean active) {
         SquarePanel.active = active;
-    }
-
-    public static void disable(boolean disable) {
-        SquarePanel.active = disable;
     }
 
     public void setWhitePieces(Piece[] whitePieces) {
@@ -179,22 +175,12 @@ class SquarePanel extends JPanel {
 
             for (int i = 0; i < 1; i++) {
                 for (int j = 0; j < 8; j++) {
-//                    SquresWithNumbers[i][j] = blackPieces[counter1].setNum("1");
                     setPieceOnSquare(squares[i][j], blackPieces[counter1++]);
-//
-//                }
-//            }
-//
-//            for (int i = 0; i < 1; i++) {
-//                for (int j = 7; j > 4; j--) {
-//                    SquresWithNumbers[i][j] = blackPieces[counter1].setNum("1");
-//                    setPieceOnSquare(squares[0][j], blackPieces[counter1++]);
 
                 }
             }
             for (int i = 0; i < 1; i++) {
                 for (int j = 0; j < 8; j++) {
-//                    SquresWithNumbers[1][j] = blackPieces[counter1].setNum("1");
                     setPieceOnSquare(squares[1][j], blackPieces[counter1++]);
 
                 }
@@ -202,7 +188,6 @@ class SquarePanel extends JPanel {
 
             for (int i = 7; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
-//                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("2");
                     whitePieces[counter2].setPieceToUser();
                     setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
 
@@ -211,18 +196,9 @@ class SquarePanel extends JPanel {
 
             for (int i = 6; i < 7; i++) {
                 for (int j = 0; j < 8; j++) {
-//                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("2");
                     whitePieces[counter2].setPieceToUser();
                     setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
 
-                    /*  }
-                     }
-
-                     for (int i = 7; i < 8; i++) {
-                     for (int j = 7; j > 4; j--) {
-                     SquresWithNumbers[i][j] = whitePieces[counter2].setNum("2");
-                     whitePieces[counter2].setPieceToUser();
-                     setPieceOnSquare(squares[i][j], whitePieces[counter2--]);*/
                 }
             }
 
@@ -232,21 +208,11 @@ class SquarePanel extends JPanel {
             counter2 = 0;
             for (int i = 0; i < 1; i++) {
                 for (int j = 0; j < 8; j++) {
-//                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("1");
                     setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
-
-                    /*  }
-                     }
-
-                     for (int i = 0; i < 1; i++) {
-                     for (int j = 7; j > 4; j--) {
-                     SquresWithNumbers[i][j] = whitePieces[counter2].setNum("1");
-                     setPieceOnSquare(squares[0][j], whitePieces[counter2++]);*/
                 }
             }
             for (int i = 1; i < 2; i++) {
                 for (int j = 0; j < 8; j++) {
-//                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("1");
                     setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
 
                 }
@@ -254,7 +220,6 @@ class SquarePanel extends JPanel {
 
             for (int i = 7; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
-//                    SquresWithNumbers[i][j] = blackPieces[counter1].setNum("2");
                     blackPieces[counter1].setPieceToUser();
                     setPieceOnSquare(squares[i][j], blackPieces[counter1++]);
 
@@ -263,30 +228,13 @@ class SquarePanel extends JPanel {
 
             for (int i = 6; i < 7; i++) {
                 for (int j = 0; j < 8; j++) {
-//                    SquresWithNumbers[i][j] = blackPieces[counter1].setNum("2");
                     blackPieces[counter1].setPieceToUser();
                     setPieceOnSquare(squares[i][j], blackPieces[counter1++]);
 
-                    /*}
-                     }
-
-                     for (int i = 7; i < 8; i++) {
-
-                     for (int j = 7; j > 4; j--) {
-                     SquresWithNumbers[i][j] = blackPieces[counter1].setNum("2");
-                     blackPieces[counter1].setPieceToUser();
-                     setPieceOnSquare(squares[i][j], blackPieces[counter1--]);*/
                 }
             }
 
         }
-//        
-//        for (int i = 0; i < 8; i++) {
-//                for (int j = 0; j < 8; j++) {
-//                    System.out.print(SquresWithNumbers[i][j]+" ");
-//                }
-//                System.out.println();
-//        }
 
     }
 
@@ -300,11 +248,14 @@ class SquarePanel extends JPanel {
     public SquarePanel(String Col) {
 
         resetBoard(Col);
+        playGame();
 
     }
 
     public void playComputer() {
         System.out.println("I am the computer");
+        setActive(true);
+
     }
 
     public void playUser() {
@@ -322,17 +273,13 @@ class SquarePanel extends JPanel {
 
     public void playGame() {
 
-        if (machineTurn) {
+        if (!machineTurn) {
             playComputer();
             playUser();
-            machineTurn = false;
         } else {
             playUser();
             playComputer();
-            machineTurn = true;
-
         }
-
     }
 
     public void callGame() {
@@ -379,7 +326,9 @@ class SquarePanel extends JPanel {
                             setPieceOnSquare(squares[a][b], null);
                             setPieceOnSquare(squares[a][b], nIcon);
                             valid = true;
-                            break;
+                            setActive(false);
+                            playComputer();
+//                            break;
                         }
 
                     }
@@ -398,6 +347,7 @@ class SquarePanel extends JPanel {
             }
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
 
             if (active) {
