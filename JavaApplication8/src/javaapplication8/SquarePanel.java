@@ -4,8 +4,12 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.lang.Math.max;
+import static java.lang.Math.max;
+import static java.lang.Math.max;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 class Location {
 
@@ -31,6 +35,21 @@ class Square extends JButton {
     int a;
     int b;
     Piece piece;
+    
+    public Square(int a, int b, Piece piece)
+    {
+        this.a=a;
+        this.b=b;
+        this.piece=piece;
+    }
+    
+    
+    public Square(int a, int b)
+    {
+        this.a=a;
+        this.b=b;
+        this.piece=null;
+    }
 
     public void setA(int a) {
         this.a = a;
@@ -58,7 +77,8 @@ final class SquarePanel extends JPanel {
     static Piece temp;
     Square originSquare;
     static boolean machineTurn = false;
-    ArrayList<Square> validMoves;
+    ArrayList<Square> userValidMoves;
+    ArrayList<Square> computerValidMoves;
     boolean valid = false;
     public int[][] SquresWithNumbers = new int[8][8];
     static boolean active = true;
@@ -148,7 +168,7 @@ final class SquarePanel extends JPanel {
                     white = !white;
                     cnt = 1;
                 }
-                squares[i][j] = new Square();
+                squares[i][j] = new Square(i,j);
                 if (white == true) {
                     squares[i][j].setBackground(Color.LIGHT_GRAY);
                     this.add(squares[i][j]);
@@ -254,8 +274,64 @@ final class SquarePanel extends JPanel {
 
     public void playComputer() {
         System.out.println("I am the computer");
+
+        while ( true)
+        {
+            ArrayList<Square> temp = getComputerValidMoves();
+            if ( !temp.isEmpty())
+            {computerValidMoves = temp;
+            break;}
+        }
+        
+        
+        int length = computerValidMoves.size();
+        
+      Random ran = new Random();
+
+    int randomNum = ran.nextInt(length);
+
+        Square destination = computerValidMoves.get(randomNum);
+        Piece destinationPiece = randomSquare.getPiece();
+        setPieceOnSquare(randomSquare, null);
+        setPieceOnSquare(destination, destinationPiece);
+
         setActive(true);
 
+    }
+    
+    Square randomSquare =null;
+
+    public ArrayList<Square> getComputerValidMoves() {
+        ArrayList<Square> getMoves;
+         randomSquare = chooseSquare();
+        int squareA = randomSquare.a;
+        int squareB = randomSquare.b;
+        Piece randomPiece = randomSquare.piece;
+        getMoves = randomPiece.getValidMoves(squares, new Location(squareA, squareB));
+
+        return getMoves;
+    }
+
+    public Square chooseSquare() {
+
+        ArrayList<Square> computerSquares = new ArrayList<>();
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+
+                Piece temp = squares[i][j].getPiece();
+                if (!(temp == null) && !temp.userOwnership) {
+                    computerSquares.add(squares[i][j]);
+                }
+            }
+        }
+
+        int length = computerSquares.size();
+        int randomIndex = ThreadLocalRandom.current().nextInt(0, length);
+
+        Square destination = computerSquares.get(randomIndex);
+
+        return destination;
     }
 
     public void playUser() {
@@ -311,7 +387,7 @@ final class SquarePanel extends JPanel {
                     originSquare = squares[a][b];
                     setPieceOnSquare(squares[a][b], null);
                     old = true;
-                    validMoves = nIcon.getValidMoves(squares, new Location(a, b));
+                    userValidMoves = nIcon.getValidMoves(squares, new Location(a, b));
                 }
             } else {
                 boolean userPiece2 = false;
@@ -321,7 +397,7 @@ final class SquarePanel extends JPanel {
                 }
                 if (!userPiece2) {
                     valid = false;
-                    for (Square validMove : validMoves) {
+                    for (Square validMove : userValidMoves) {
                         if (squares[a][b].equals(validMove)) {
                             setPieceOnSquare(squares[a][b], null);
                             setPieceOnSquare(squares[a][b], nIcon);
