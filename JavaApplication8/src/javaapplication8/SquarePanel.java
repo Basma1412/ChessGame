@@ -135,12 +135,12 @@ class SquarePanel extends JPanel {
                 }
                 squares[i][j] = new Square();
                 if (white == true) {
-                    squares[i][j].setBackground(Color.WHITE);
+                    squares[i][j].setBackground(Color.LIGHT_GRAY);
                     this.add(squares[i][j]);
                     white = !white;
 
                 } else {
-                    squares[i][j].setBackground(Color.black);
+                    squares[i][j].setBackground(Color.DARK_GRAY);
                     this.add(squares[i][j]);
                     white = !white;
                 }
