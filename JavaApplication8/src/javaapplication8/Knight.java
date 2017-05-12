@@ -62,56 +62,56 @@ public class Knight extends Piece {
 
         if (Xrightup >= 0 && Xrightup < maxX && Yrightup >= 0 && Yrightup < maxY) {
             Square tempSquare = squares[Xrightup][Yrightup];
-            Piece temp = squares[Xrightup][Yrightup].getPiece();
+            Piece temp = tempSquare.getPiece();
             if ((temp==null)||temp.userOwnership != userOwnership) {
                 valid_moves.add(tempSquare);
             }
         }
         if (Xleftup >= 0 && Xleftup < maxX && Yleftup >= 0 && Yleftup < maxY) {
             Square tempSquare = squares[Xleftup][Yleftup];
-            Piece temp = squares[Xrightup][Yrightup].getPiece();
+            Piece temp = tempSquare.getPiece();
             if ((temp==null)||temp.userOwnership != userOwnership) {
                 valid_moves.add(tempSquare);
             }
         }
         if (Xupright >= 0 && Xupright < maxX && Yupright >= 0 && Yupright < maxY) {
             Square tempSquare = squares[Xupright][Yupright];
-            Piece temp = squares[Xupright][Yupright].getPiece();
+            Piece temp = tempSquare.getPiece();
             if ((temp==null)||temp.userOwnership != userOwnership) {
                 valid_moves.add(tempSquare);
             }
         }
         if (Xupleft >= 0 && Xupleft < maxX && Yupleft >= 0 && Yupleft < maxY) {
             Square tempSquare = squares[Xupleft][Yupleft];
-            Piece temp = squares[Xupleft][Yupleft].getPiece();
+            Piece temp = tempSquare.getPiece();
             if ((temp==null)||temp.userOwnership != userOwnership) {
                 valid_moves.add(tempSquare);
             }
         }
         if (Xrightdown >= 0 && Xrightdown < maxX && Yrightdown >= 0 && Yrightdown < maxY) {
             Square tempSquare = squares[Xrightdown][Yrightdown];
-            Piece temp = squares[Xrightdown][Yrightdown].getPiece();
+            Piece temp = tempSquare.getPiece();
             if ((temp==null)||temp.userOwnership != userOwnership) {
                 valid_moves.add(tempSquare);
             }
         }
         if (Xleftdown >= 0 && Xleftdown < maxX && Yleftdown >= 0 && Yleftdown < maxY) {
             Square tempSquare = squares[Xleftdown][Yleftdown];
-            Piece temp = squares[Xleftdown][Yleftdown].getPiece();
+            Piece temp = tempSquare.getPiece();
             if ((temp==null)||temp.userOwnership != userOwnership) {
                 valid_moves.add(tempSquare);
             }
         }
         if (Xdownright >= 0 && Xdownright < maxX && Ydownright >= 0 && Ydownright < maxY) {
             Square tempSquare = squares[Xdownright][Ydownright];
-            Piece temp = squares[Xdownright][Ydownright].getPiece();
+            Piece temp = tempSquare.getPiece();
             if ((temp==null)||temp.userOwnership != userOwnership) {
                 valid_moves.add(tempSquare);
             }
         }
         if (Xdownleft >= 0 && Xdownleft < maxX && Ydownleft >= 0 && Ydownleft < maxY) {
             Square tempSquare = squares[Xdownleft][Ydownleft];
-            Piece temp = squares[Xdownleft][Ydownleft].getPiece();
+            Piece temp = tempSquare.getPiece();
             if ((temp==null)||temp.userOwnership != userOwnership) {
                 valid_moves.add(tempSquare);
             }
