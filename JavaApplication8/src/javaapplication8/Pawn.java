@@ -13,6 +13,14 @@ public class Pawn extends Piece {
     public void setWhite() {
         this.image = "..\\pictures\\white\\pawn.png";
     }
+    
+//    public int setNum(String num){
+//        String temp = num.concat("6");
+//        int hh = Integer.parseInt(temp);
+//        return hh;
+//    }
+    
+    
 
     @Override
     public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
@@ -21,7 +29,6 @@ public class Pawn extends Piece {
 
         int maxX = squares[0].length;
         int maxY = squares.length;
-
         ArrayList<Square> valid_moves = new ArrayList<>();
         if (userOwnership == false) {
             int up = x + 1;
@@ -31,12 +38,19 @@ public class Pawn extends Piece {
             int diagRightY = y + 1;
             if (x == 1) {
                 for (int a = x; a < 4; a++) {
-                    valid_moves.add(squares[a][y]);
+                    if (valid(squares, a, y, userOwnership))
+                        valid_moves.add(squares[a][y]);
                 }
             } else {
-                valid_moves.add(squares[up][y]);
-                valid_moves.add(squares[diaglefX][diaglefY]);
-                valid_moves.add(squares[diagRightX][diagRightY]);
+                if (up<8 && valid(squares, up, y, userOwnership))
+                    valid_moves.add(squares[up][y]);
+                if (diaglefX<8 && diaglefY>=0 && valid(squares, diaglefX, diaglefY, userOwnership))
+                    valid_moves.add(squares[diaglefX][diaglefY]);
+                if (diagRightX<8 && diagRightY<8 && valid(squares, diagRightX, diagRightY, userOwnership))
+                    valid_moves.add(squares[diagRightX][diagRightY]);
+                
+                
+                
             }
 
         } else {
@@ -46,13 +60,21 @@ public class Pawn extends Piece {
             int diagRightXme = x - 1;
             int diagRightYme = y + 1;
             if (x == 6) {
-                for (int a = x; a < 3; a++) {
-                    valid_moves.add(squares[a][y]);
+                for (int a = x; a > 3; a--) {
+                    if ( valid(squares, a, y, userOwnership))
+                        valid_moves.add(squares[a][y]);
+                    else
+                        break;
                 }
             } else {
-                valid_moves.add(squares[upme][y]);
-                valid_moves.add(squares[diaglefXme][diaglefYme]);
-                valid_moves.add(squares[diagRightXme][diagRightYme]);
+                if (upme>=0 &&  valid(squares, upme, y, userOwnership))
+                    valid_moves.add(squares[upme][y]);
+                
+                if (diaglefXme>=0 && diaglefYme>=0 &&  valid(squares, diaglefXme, diaglefYme, userOwnership))
+                    valid_moves.add(squares[diaglefXme][diaglefYme]);
+                
+                if (diagRightXme>=0 && diagRightYme<8 &&  valid(squares, diagRightXme, diagRightYme, userOwnership))
+                    valid_moves.add(squares[diagRightXme][diagRightYme]);
             }
         }
         return valid_moves;

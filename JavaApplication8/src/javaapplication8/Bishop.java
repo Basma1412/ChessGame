@@ -20,6 +20,11 @@ public class Bishop  extends Piece{
         this.image="..\\pictures\\black\\bishop.png";
     }
     
+//     public int setNum(String num){
+//        String temp = num.concat("3");
+//        int hh = Integer.parseInt(temp);
+//        return hh;
+//    }
     
     
     public void setWhite()
@@ -40,19 +45,30 @@ public class Bishop  extends Piece{
         ArrayList<Square> valid_moves = new ArrayList<>();
  //diagonal up left
         for (int a = y, b = x; a < maxY && b >= 0; a++, b--) {
-            valid_moves.add(squares[b][a]);
+            if ( valid(squares, b, a, userOwnership))
+                valid_moves.add(squares[b][a]);
+            else
+                break;
         }
 //diagonal right down
         for (int a = y, b = x; a >= 0 && b < maxX; a--, b++) {
-            valid_moves.add(squares[b][a]);
+            if ( valid(squares, b, a, userOwnership))
+                valid_moves.add(squares[b][a]);
+            else
+                break;
         }
 //diagonal up right 
         for (int a = y, b = x; a >= 0 && b >= 0; a--, b--) {
-            valid_moves.add(squares[b][a]);
+            if ( valid(squares, b, a, userOwnership))
+                valid_moves.add(squares[b][a]);
+            else
+                break;
         }
 //diagonal down left
         for (int a = y, b = x; a < maxY && b < maxX; a++, b++) {
-            valid_moves.add(squares[b][a]);
+            if ( valid(squares, b, a, userOwnership))
+                valid_moves.add(squares[b][a]);
+            else break;
         }
 
         return valid_moves;

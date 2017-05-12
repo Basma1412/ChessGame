@@ -26,6 +26,11 @@ public class Rook  extends Piece {
         this.image="..\\pictures\\white\\rook.png";
     }
     
+//    public int setNum(String num){
+//        String temp = num.concat("1");
+//        int hh = Integer.parseInt(temp);
+//        return hh;
+//    }
 
     @Override
     public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
@@ -39,19 +44,38 @@ public class Rook  extends Piece {
         ArrayList<Square> valid_moves = new ArrayList<>();
 //left
         for (int i = y; i < maxY; i++) {
-            valid_moves.add(squares[x][i]);
+            if ( valid(squares, x, i, userOwnership))
+                valid_moves.add(squares[x][i]);
+            else
+                break;
+            
         }
 //down
         for (int a = x; a < maxX; a++) {
-            valid_moves.add(squares[a][y]);
+            if ( valid(squares, a, y, userOwnership))
+                 valid_moves.add(squares[a][y]);
+            else
+                break;
+            
+           
         }
 //up
         for (int a = 0; a < x; a++) {
-            valid_moves.add(squares[a][y]);
+            if ( valid(squares, a, y, userOwnership))
+                valid_moves.add(squares[a][y]);
+            else
+                break;
+            
+            
         }
 //right
         for (int a = 0; a < y; a++) {
-            valid_moves.add(squares[x][a]);
+            if ( valid(squares, x, a, userOwnership))
+                valid_moves.add(squares[x][a]);
+            else
+                break;
+            
+            
         }
         return valid_moves;
     }

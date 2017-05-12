@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/Player.java</file>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/Pawn.java</file>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/Rook.java</file>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/Queen.java</file>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/King.java</file>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/Piece.java</file>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/Bishop.java</file>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/Controller.java</file>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/JavaApplication8.java</file>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/SquarePanel.java</file>
+            <file>file:/D:/college/semester%208/AI/ChessGame/JavaApplication8/src/javaapplication8/Knight.java</file>
+        </group>
     </open-files>
 </project-private>

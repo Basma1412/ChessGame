@@ -13,9 +13,13 @@ class Board extends JFrame {
 
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000, 1000);
+//        this.setSize(1000, 1000);
+//        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+//        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        setBounds(0, 0, dim.width/2, dim.width/2);
+        this.setLocationRelativeTo(null);
         Container c = this.getContentPane();
 
         panl = new SquarePanel(Col);

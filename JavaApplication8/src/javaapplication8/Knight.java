@@ -18,7 +18,11 @@ public class Knight  extends Piece{
         this.image="..\\pictures\\black\\knight.png";
     }
     
-    
+//    public int setNum(String num){
+//        String temp = num.concat("2");
+//        int hh = Integer.parseInt(temp);
+//        return hh;
+//    }
     
     public void setWhite()
     {

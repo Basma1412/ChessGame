@@ -50,13 +50,14 @@ class SquarePanel extends JPanel {
     static boolean machineTurn = false;
     ArrayList<Square> validMoves;
     boolean valid = false;
+    public int[][] SquresWithNumbers = new int[8][8];
 
     public void setWhitePieces(Piece[] whitePieces) {
         whitePieces[0] = new Rook();
         whitePieces[1] = new Knight();
         whitePieces[2] = new Bishop();
-        whitePieces[3] = new King();
-        whitePieces[4] = new Queen();
+        whitePieces[4] = new King();
+        whitePieces[3] = new Queen();
         whitePieces[5] = new Bishop();
         whitePieces[6] = new Knight();
         whitePieces[7] = new Rook();
@@ -76,8 +77,8 @@ class SquarePanel extends JPanel {
         blackPieces[0] = new Rook();
         blackPieces[1] = new Knight();
         blackPieces[2] = new Bishop();
-        blackPieces[3] = new King();
-        blackPieces[4] = new Queen();
+        blackPieces[4] = new King();
+        blackPieces[3] = new Queen();
         blackPieces[5] = new Bishop();
         blackPieces[6] = new Knight();
         blackPieces[7] = new Rook();
@@ -118,7 +119,11 @@ class SquarePanel extends JPanel {
         this.Col = Col;
         int cnt = 0;
         this.setLayout(new GridLayout(8, 8));
-
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                SquresWithNumbers[i][j] = 0;
+            }
+        }
         boolean white = true;
         for (int i = 0; i < 8; i++) {
 
@@ -150,113 +155,122 @@ class SquarePanel extends JPanel {
         setBlackPieces(blackPieces);
 
         int counter1 = 0;
-        int counter2 = 15;
+        int counter2 = 0;
         if (Col.equalsIgnoreCase("White")) {
 
             for (int i = 0; i < 1; i++) {
-                for (int j = 0; j < 5; j++) {
-
+                for (int j = 0; j < 8; j++) {
+//                    SquresWithNumbers[i][j] = blackPieces[counter1].setNum("1");
                     setPieceOnSquare(squares[i][j], blackPieces[counter1++]);
-
-                }
-            }
-
-            for (int i = 0; i < 1; i++) {
-                for (int j = 7; j > 4; j--) {
-                    setPieceOnSquare(squares[0][j], blackPieces[counter1++]);
+//
+//                }
+//            }
+//
+//            for (int i = 0; i < 1; i++) {
+//                for (int j = 7; j > 4; j--) {
+//                    SquresWithNumbers[i][j] = blackPieces[counter1].setNum("1");
+//                    setPieceOnSquare(squares[0][j], blackPieces[counter1++]);
 
                 }
             }
             for (int i = 0; i < 1; i++) {
                 for (int j = 0; j < 8; j++) {
+//                    SquresWithNumbers[1][j] = blackPieces[counter1].setNum("1");
                     setPieceOnSquare(squares[1][j], blackPieces[counter1++]);
+
+                }
+            }
+
+            for (int i = 7; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+//                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("2");
+                    whitePieces[counter2].setPieceToUser();
+                    setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
 
                 }
             }
 
             for (int i = 6; i < 7; i++) {
                 for (int j = 0; j < 8; j++) {
-
+//                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("2");
                     whitePieces[counter2].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], whitePieces[counter2--]);
+                    setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
 
-                }
-            }
-
-            for (int i = 7; i < 8; i++) {
-                for (int j = 0; j < 5; j++) {
-
-                    whitePieces[counter2].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], whitePieces[counter2--]);
-
-                }
+              /*  }
             }
 
             for (int i = 7; i < 8; i++) {
                 for (int j = 7; j > 4; j--) {
-
+                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("2");
                     whitePieces[counter2].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], whitePieces[counter2--]);
+                    setPieceOnSquare(squares[i][j], whitePieces[counter2--]);*/
 
                 }
             }
 
         } else {
 
-            counter1 = 15;
+            counter1 = 0;
             counter2 = 0;
             for (int i = 0; i < 1; i++) {
-                for (int j = 0; j < 5; j++) {
+                for (int j = 0; j < 8; j++) {
+//                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("1");
+                    setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
 
+              /*  }
+            }
+
+            for (int i = 0; i < 1; i++) {
+                for (int j = 7; j > 4; j--) {
+                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("1");
+                    setPieceOnSquare(squares[0][j], whitePieces[counter2++]);*/
+
+                }
+            }
+            for (int i = 1; i < 2; i++) {
+                for (int j = 0; j < 8; j++) {
+//                    SquresWithNumbers[i][j] = whitePieces[counter2].setNum("1");
                     setPieceOnSquare(squares[i][j], whitePieces[counter2++]);
 
                 }
             }
 
-            for (int i = 0; i < 1; i++) {
-                for (int j = 7; j > 4; j--) {
-
-                    setPieceOnSquare(squares[0][j], whitePieces[counter2++]);
-
-                }
-            }
-            for (int i = 0; i < 1; i++) {
+            for (int i = 7; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
-
-                    setPieceOnSquare(squares[1][j], whitePieces[counter2++]);
+//                    SquresWithNumbers[i][j] = blackPieces[counter1].setNum("2");
+                    blackPieces[counter1].setPieceToUser();
+                    setPieceOnSquare(squares[i][j], blackPieces[counter1++]);
 
                 }
             }
 
             for (int i = 6; i < 7; i++) {
                 for (int j = 0; j < 8; j++) {
-
+//                    SquresWithNumbers[i][j] = blackPieces[counter1].setNum("2");
                     blackPieces[counter1].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], blackPieces[counter1--]);
+                    setPieceOnSquare(squares[i][j], blackPieces[counter1++]);
 
-                }
-            }
-
-            for (int i = 7; i < 8; i++) {
-                for (int j = 0; j < 5; j++) {
-
-                    blackPieces[counter1].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], blackPieces[counter1--]);
-
-                }
+                /*}
             }
 
             for (int i = 7; i < 8; i++) {
 
                 for (int j = 7; j > 4; j--) {
-
+                    SquresWithNumbers[i][j] = blackPieces[counter1].setNum("2");
                     blackPieces[counter1].setPieceToUser();
-                    setPieceOnSquare(squares[i][j], blackPieces[counter1--]);
+                    setPieceOnSquare(squares[i][j], blackPieces[counter1--]);*/
 
                 }
             }
 
         }
+//        
+//        for (int i = 0; i < 8; i++) {
+//                for (int j = 0; j < 8; j++) {
+//                    System.out.print(SquresWithNumbers[i][j]+" ");
+//                }
+//                System.out.println();
+//        }
 
     }
 

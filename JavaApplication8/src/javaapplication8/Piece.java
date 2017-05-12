@@ -44,13 +44,25 @@ public abstract class Piece {
         this.userOwnership =false;
     }
 
-    
+    public boolean valid(Square squares[][], int a, int b, boolean temp){
+        Piece pieceonSquare = squares[a][b].getPiece();
+        if (pieceonSquare == null){
+            return true;
+        }else{
+            if (pieceonSquare.userOwnership!=temp){
+                return true;
+            }
+        }
+        return false;
+    }
     
     
     public abstract void setWhite();
     
     
     public abstract void setBlack();
+    
+//     public abstract int setNum(String num);
     
     
     public abstract ArrayList<Square> getValidMoves(Square[][] squares, Location current_location);
