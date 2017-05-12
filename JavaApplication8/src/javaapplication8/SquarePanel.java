@@ -399,11 +399,12 @@ final class SquarePanel extends JPanel {
                     valid = false;
                     for (Square validMove : userValidMoves) {
                         if (squares[a][b].equals(validMove)) {
-                            setPieceOnSquare(squares[a][b], null);
+                            if (!(squares[a][b].equals(originSquare)))
+                            {  setPieceOnSquare(squares[a][b], null);
                             setPieceOnSquare(squares[a][b], nIcon);
                             valid = true;
                             setActive(false);
-                            playComputer();
+                            playComputer();}
 //                            break;
                         }
 
