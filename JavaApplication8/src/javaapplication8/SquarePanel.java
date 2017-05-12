@@ -61,6 +61,15 @@ class SquarePanel extends JPanel {
     ArrayList<Square> validMoves;
     boolean valid = false;
     public int[][] SquresWithNumbers = new int[8][8];
+    static boolean active = true;
+
+    public static void setActive(boolean active) {
+        SquarePanel.active = active;
+    }
+
+    public static void disable(boolean disable) {
+        SquarePanel.active = disable;
+    }
 
     public void setWhitePieces(Piece[] whitePieces) {
         whitePieces[0] = new Rook();
@@ -341,8 +350,7 @@ class SquarePanel extends JPanel {
             this.b = b;
         }
 
-        public void actionPerformed(ActionEvent e) {
-
+        protected void doPerformAction(ActionEvent e) {
             if (old == false) {
                 boolean userPiece = false;
                 Piece pieceonSquare = squares[a][b].getPiece();
@@ -389,5 +397,14 @@ class SquarePanel extends JPanel {
                 old = false;
             }
         }
+
+        public void actionPerformed(ActionEvent e) {
+
+            if (active) {
+                doPerformAction(e);
+            }
+
+        }
+
     }
 }
