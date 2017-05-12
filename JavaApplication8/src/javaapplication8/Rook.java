@@ -36,48 +36,42 @@ public class Rook  extends Piece {
     public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
         int x = current_location.getI();
         int y = current_location.getJ();
-        
-         int maxX = squares[0].length;
+
+        int maxX = squares[0].length;
         int maxY = squares.length;
 
+        int up = x - 1;
+        int down = x + 1;
 
         ArrayList<Square> valid_moves = new ArrayList<>();
 //left
-        for (int i = y; i < maxY; i++) {
-            if ( valid(squares, x, i, userOwnership))
-                valid_moves.add(squares[x][i]);
-            else
-                break;
-            
-        }
-//down
-        for (int a = x; a < maxX; a++) {
-            if ( valid(squares, a, y, userOwnership))
-                 valid_moves.add(squares[a][y]);
-            else
-                break;
-            
-           
-        }
-//up
-        for (int a = 0; a < x; a++) {
-            if ( valid(squares, a, y, userOwnership))
-                valid_moves.add(squares[a][y]);
-            else
-                break;
-            
-            
-        }
-//right
-        for (int a = 0; a < y; a++) {
+        for (int a = y; a < maxY; a++) {
             if ( valid(squares, x, a, userOwnership))
                 valid_moves.add(squares[x][a]);
             else
                 break;
-            
-            
+
         }
-        return valid_moves;
-    }
+//down
+        for (int a = x; a < maxX; a++) {
+            if (valid(squares, a, y, userOwnership))
+                valid_moves.add(squares[a][y]);
+            else break;
+        }
+//up
+        for (int a = x; a > 0; a--) {
+            if (valid(squares, a, y, userOwnership))
+                valid_moves.add(squares[a][y]);
+            else break;
+        }
+//right
+        for (int a = 0; a < y; a++) {
+            if (valid(squares, x, a, userOwnership))
+                valid_moves.add(squares[x][a]);
+            else break;
+        }
+            return valid_moves;
+
+}
     
 }
