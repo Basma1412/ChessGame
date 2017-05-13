@@ -1,2 +1,0 @@
-javaapplication8.Board
-javaapplication8.JavaApplication8

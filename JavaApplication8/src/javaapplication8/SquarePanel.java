@@ -79,6 +79,7 @@ final class SquarePanel extends JPanel {
     boolean valid = false;
     public int[][] SquresWithNumbers = new int[8][8];
     static boolean active = true;
+    static boolean machineturn=false;
 
     public static void setActive(boolean active) {
         SquarePanel.active = active;
@@ -270,30 +271,53 @@ final class SquarePanel extends JPanel {
     }
 
     public void playComputer() {
+        machineturn=true;
         System.out.println("I am the computer");
-
+        boolean finished = false;
         while (true) {
             ArrayList<Square> temp = getComputerValidMoves();
-            if (!temp.isEmpty()) {
-                computerValidMoves = temp;
+            if (temp == null) {
+                System.out.println("Finished 2 ");
+
+                Container contain;
+                JPanel reChange, reChange2;
+                JButton reChangeButton;
+                contain = this;
+                contain.removeAll();
+                contain.setLayout(null);
+
+                JLabel image = new JLabel(new ImageIcon("..\\pictures\\win.jpg"));
+                image.setSize(1000, 1000);
+
+                contain.add(image);
+                validate();
+                repaint();
+                setVisible(true);
+
+                finished = true;
                 break;
+            } else {
+                if (!temp.isEmpty()) {
+                    computerValidMoves = temp;
+                    break;
+                }
             }
         }
+        if (!finished) {
+            int length = computerValidMoves.size();
 
-        int length = computerValidMoves.size();
+            Random ran = new Random();
 
-        Random ran = new Random();
+            int randomNum = ran.nextInt(length);
 
-        int randomNum = ran.nextInt(length);
-
-        Square destination = computerValidMoves.get(randomNum);
-        Piece destinationPiece = randomSquare.getPiece();
-        String jj = randomSquare.piece.image;
-        setPieceOnSquare(randomSquare, null);
-        setPieceOnSquare(destination, destinationPiece);
-        System.out.println("Piece number: "+ jj+" jumped From [" + randomSquare.a + ", " + randomSquare.b + "] To [" + +destination.a + ", " + destination.b + "]");
-        setActive(true);
-
+            Square destination = computerValidMoves.get(randomNum);
+            Piece destinationPiece = randomSquare.getPiece();
+            String jj = randomSquare.piece.image;
+            setPieceOnSquare(randomSquare, null);
+            setPieceOnSquare(destination, destinationPiece);
+            System.out.println("Piece number: " + jj + " jumped From [" + randomSquare.a + ", " + randomSquare.b + "] To [" + +destination.a + ", " + destination.b + "]");
+            setActive(true);
+        }
     }
 
     Square randomSquare = null;
@@ -301,12 +325,16 @@ final class SquarePanel extends JPanel {
     public ArrayList<Square> getComputerValidMoves() {
         ArrayList<Square> getMoves;
         randomSquare = chooseSquare();
-        int squareA = randomSquare.a;
-        int squareB = randomSquare.b;
-        Piece randomPiece = randomSquare.piece;
-        getMoves = randomPiece.getValidMoves(squares, new Location(squareA, squareB));
+        if (randomSquare == null) {
+            return null;
+        } else {
+            int squareA = randomSquare.a;
+            int squareB = randomSquare.b;
+            Piece randomPiece = randomSquare.piece;
+            getMoves = randomPiece.getValidMoves(squares, new Location(squareA, squareB));
 
-        return getMoves;
+            return getMoves;
+        }
     }
 
     public Square chooseSquare() {
@@ -324,14 +352,20 @@ final class SquarePanel extends JPanel {
         }
 
         int length = computerSquares.size();
-        int randomIndex = ThreadLocalRandom.current().nextInt(0, length);
 
-        Square destination = computerSquares.get(randomIndex);
+        if (length == 0) {
+            System.out.println("Finished");
+            return null;
+        } else {
+            int randomIndex = ThreadLocalRandom.current().nextInt(0, length);
+            Square destination = computerSquares.get(randomIndex);
 
-        return destination;
+            return destination;
+        }
     }
 
     public void playUser() {
+        machineturn=false;
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
