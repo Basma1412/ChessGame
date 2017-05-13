@@ -54,6 +54,7 @@ public class Pawn extends Piece {
             }
 
         } else {
+            valid_moves.add(squares[x][y]);
             int upme = x - 1;
             int diaglefXme = x - 1;
             int diaglefYme = y - 1;

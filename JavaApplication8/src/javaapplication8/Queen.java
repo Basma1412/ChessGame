@@ -13,25 +13,19 @@ import java.util.ArrayList;
  */
 public class Queen extends Piece {
 
-    
-    public void setBlack()
-    {
-        this.image="..\\pictures\\black\\queen.png";
+    public void setBlack() {
+        this.image = "..\\pictures\\black\\queen.png";
     }
-    
-    
-    
-    public void setWhite()
-    {
-        this.image="..\\pictures\\white\\queen.png";
+
+    public void setWhite() {
+        this.image = "..\\pictures\\white\\queen.png";
     }
-    
+
 //    public int setNum(String num){
 //        String temp = num.concat("4");
 //        int hh = Integer.parseInt(temp);
 //        return hh;
 //    }
-    
     @Override
     public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
 
@@ -46,56 +40,99 @@ public class Queen extends Piece {
 
         ArrayList<Square> valid_moves = new ArrayList<>();
 //left
-        for (int a = y; a < maxY; a++) {
-            if ( valid(squares, x, a, userOwnership))
+
+        if (userOwnership) {
+            valid_moves.add(squares[x][y]);
+       }
+        for (int a = y - 1; a >= 0; a--) {
+            if (valid(squares, x, a, userOwnership)) {
                 valid_moves.add(squares[x][a]);
-            else
+                if (validOnOpponent(squares, x, a, userOwnership)){
+                    break;
+                }
+            } else {
                 break;
+            }
 
         }
 //down
-        for (int a = x; a < maxX; a++) {
-            if (valid(squares, a, y, userOwnership))
+        for (int a = x + 1; a < maxX; a++) {
+            if (valid(squares, a, y, userOwnership)) {
                 valid_moves.add(squares[a][y]);
-            else break;
+                if (validOnOpponent(squares, a, y, userOwnership)){
+                    break;
+                }
+            } else {
+                break;
+            }
         }
 //up
-        for (int a = x; a >= 0; a--) {
-            if (valid(squares, a, y, userOwnership))
+        for (int a = x - 1; a >= 0; a--) {
+            if (valid(squares, a, y, userOwnership)) {
                 valid_moves.add(squares[a][y]);
-            else break;
+                if (validOnOpponent(squares, a, y, userOwnership)){
+                    break;
+                }
+            } else {
+                break;
+            }
         }
 //right
-        for (int a = 0; a < y; a++) {
-            if (valid(squares, x, a, userOwnership))
+        for (int a = y + 1; a < maxY; a++) {
+            if (valid(squares, x, a, userOwnership)) {
                 valid_moves.add(squares[x][a]);
-            else break;
+                if (validOnOpponent(squares, x, a, userOwnership)){
+                    break;
+                }
+            } else {
+                break;
+            }
         }
-        
+
 //diagonal up left
-        for (int a = y-1, b = x-1; a >=0 && b >= 0; a--, b--) {
-            if ( valid(squares, b, a, userOwnership))
+        for (int a = y - 1, b = x - 1; a >= 0 && b >= 0; a--, b--) {
+            if (valid(squares, b, a, userOwnership)) {
                 valid_moves.add(squares[b][a]);
-            else break;
-           
+                 if (validOnOpponent(squares, b, a, userOwnership)){
+                    break;
+                }
+            } else {
+                break;
+            }
+
         }
 //diagonal right down
-        for (int a = y+1, b = x+1; a < maxY && b < maxX; a++, b++) {
-            if ( valid(squares, b, a, userOwnership))
+        for (int a = y + 1, b = x + 1; a < maxY && b < maxX; a++, b++) {
+            if (valid(squares, b, a, userOwnership)) {
                 valid_moves.add(squares[b][a]);
-            else break;
+                 if (validOnOpponent(squares, b, a, userOwnership)){
+                    break;
+                }
+            } else {
+                break;
+            }
         }
 //diagonal up right 
-        for (int a = y+1, b = x-1; a < maxY && b >= 0; a++, b--) {
-            if ( valid(squares, b, a, userOwnership))
+        for (int a = y + 1, b = x - 1; a < maxY && b >= 0; a++, b--) {
+            if (valid(squares, b, a, userOwnership)) {
                 valid_moves.add(squares[b][a]);
-            else break;
+                 if (validOnOpponent(squares, b, a, userOwnership)){
+                    break;
+                }
+            } else {
+                break;
+            }
         }
 //diagonal down left
-        for (int a = y-1, b = x+1; a >=0 && b < maxX; a--, b++) {
-            if ( valid(squares, b, a, userOwnership))
+        for (int a = y - 1, b = x + 1; a >= 0 && b < maxX; a--, b++) {
+            if (valid(squares, b, a, userOwnership)) {
                 valid_moves.add(squares[b][a]);
-            else break;
+                 if (validOnOpponent(squares, b, a, userOwnership)){
+                    break;
+                }
+            } else {
+                break;
+            }
         }
 ////diagonal up left
 //        for (int a = y, b = x; a < maxY && b >= 0; a++, b--) {

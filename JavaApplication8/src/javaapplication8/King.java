@@ -41,6 +41,10 @@ public class King extends Piece {
         int backward = y - 1;
         int up = x - 1;
         int down = x + 1;
+        
+        if (userOwnership){
+            valid_moves.add(squares[x][y]);
+        }
 
         if (down < maxX && valid(squares, down, y, userOwnership)) {
             valid_moves.add(squares[down][y]);

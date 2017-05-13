@@ -59,6 +59,10 @@ public class Knight extends Piece {
 
         int Xdownleft = x + 2;
         int Ydownleft = y - 1;
+        
+        if (userOwnership){
+            valid_moves.add(squares[x][y]);
+        }
 
         if (Xrightup >= 0 && Xrightup < maxX && Yrightup >= 0 && Yrightup < maxY) {
             Square tempSquare = squares[Xrightup][Yrightup];

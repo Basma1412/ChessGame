@@ -51,6 +51,13 @@ public abstract class Piece {
         }
         return false;
     }
+    
+    public boolean validOnOpponent(Square squares[][], int a, int b, boolean temp){
+        Piece pieceonSquare = squares[a][b].getPiece();
+        if (pieceonSquare != null && pieceonSquare.userOwnership != temp)
+            return true;
+        return false;
+    }
 
     public abstract void setWhite();
 

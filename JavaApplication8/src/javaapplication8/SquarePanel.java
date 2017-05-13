@@ -288,9 +288,10 @@ final class SquarePanel extends JPanel {
 
         Square destination = computerValidMoves.get(randomNum);
         Piece destinationPiece = randomSquare.getPiece();
+        String jj = randomSquare.piece.image;
         setPieceOnSquare(randomSquare, null);
         setPieceOnSquare(destination, destinationPiece);
-        System.out.println("From [" + randomSquare.a + ", " + randomSquare.b + "] To [" + +destination.a + ", " + destination.b + "]");
+        System.out.println("Piece number: "+ jj+" jumped From [" + randomSquare.a + ", " + randomSquare.b + "] To [" + +destination.a + ", " + destination.b + "]");
         setActive(true);
 
     }
