@@ -42,32 +42,34 @@ public class Rook  extends Piece {
 
         int up = x - 1;
         int down = x + 1;
+        int left = y-1;
+        int right = y+1;
 
         ArrayList<Square> valid_moves = new ArrayList<>();
 //left
-        for (int a = y; a < maxY; a++) {
+        for (int a = left; a >= 0; a--) {
             if ( valid(squares, x, a, userOwnership))
                 valid_moves.add(squares[x][a]);
-          
+            else break;
 
         }
 //down
-        for (int a = x; a < maxX; a++) {
+        for (int a = down; a < maxX; a++) {
             if (valid(squares, a, y, userOwnership))
                 valid_moves.add(squares[a][y]);
-           
+            else break;
         }
 //up
-        for (int a = x; a > 0; a--) {
+        for (int a = up; a > 0; a--) {
             if (valid(squares, a, y, userOwnership))
                 valid_moves.add(squares[a][y]);
-        
+            else break;
         }
 //right
-        for (int a = 0; a < y; a++) {
+        for (int a = right; a < maxY; a++) {
             if (valid(squares, x, a, userOwnership))
                 valid_moves.add(squares[x][a]);
-         
+            else break;
         }
             return valid_moves;
 

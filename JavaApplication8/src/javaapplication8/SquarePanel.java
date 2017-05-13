@@ -35,20 +35,17 @@ class Square extends JButton {
     int a;
     int b;
     Piece piece;
-    
-    public Square(int a, int b, Piece piece)
-    {
-        this.a=a;
-        this.b=b;
-        this.piece=piece;
+
+    public Square(int a, int b, Piece piece) {
+        this.a = a;
+        this.b = b;
+        this.piece = piece;
     }
-    
-    
-    public Square(int a, int b)
-    {
-        this.a=a;
-        this.b=b;
-        this.piece=null;
+
+    public Square(int a, int b) {
+        this.a = a;
+        this.b = b;
+        this.piece = null;
     }
 
     public void setA(int a) {
@@ -168,7 +165,7 @@ final class SquarePanel extends JPanel {
                     white = !white;
                     cnt = 1;
                 }
-                squares[i][j] = new Square(i,j);
+                squares[i][j] = new Square(i, j);
                 if (white == true) {
                     squares[i][j].setBackground(Color.LIGHT_GRAY);
                     this.add(squares[i][j]);
@@ -275,35 +272,34 @@ final class SquarePanel extends JPanel {
     public void playComputer() {
         System.out.println("I am the computer");
 
-        while ( true)
-        {
+        while (true) {
             ArrayList<Square> temp = getComputerValidMoves();
-            if ( !temp.isEmpty())
-            {computerValidMoves = temp;
-            break;}
+            if (!temp.isEmpty()) {
+                computerValidMoves = temp;
+                break;
+            }
         }
-        
-        
-        int length = computerValidMoves.size();
-        
-      Random ran = new Random();
 
-    int randomNum = ran.nextInt(length);
+        int length = computerValidMoves.size();
+
+        Random ran = new Random();
+
+        int randomNum = ran.nextInt(length);
 
         Square destination = computerValidMoves.get(randomNum);
         Piece destinationPiece = randomSquare.getPiece();
         setPieceOnSquare(randomSquare, null);
         setPieceOnSquare(destination, destinationPiece);
-
+        System.out.println("From [" + randomSquare.a + ", " + randomSquare.b + "] To [" + +destination.a + ", " + destination.b + "]");
         setActive(true);
 
     }
-    
-    Square randomSquare =null;
+
+    Square randomSquare = null;
 
     public ArrayList<Square> getComputerValidMoves() {
         ArrayList<Square> getMoves;
-         randomSquare = chooseSquare();
+        randomSquare = chooseSquare();
         int squareA = randomSquare.a;
         int squareB = randomSquare.b;
         Piece randomPiece = randomSquare.piece;
@@ -399,12 +395,13 @@ final class SquarePanel extends JPanel {
                     valid = false;
                     for (Square validMove : userValidMoves) {
                         if (squares[a][b].equals(validMove)) {
-                            if (!(squares[a][b].equals(originSquare)))
-                            {  setPieceOnSquare(squares[a][b], null);
-                            setPieceOnSquare(squares[a][b], nIcon);
-                            valid = true;
-                            setActive(false);
-                            playComputer();}
+                            if (!(squares[a][b].equals(originSquare))) {
+                                setPieceOnSquare(squares[a][b], null);
+                                setPieceOnSquare(squares[a][b], nIcon);
+                                valid = true;
+                                setActive(false);
+                                playComputer();
+                            }
 //                            break;
                         }
 

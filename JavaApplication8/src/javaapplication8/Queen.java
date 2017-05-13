@@ -60,7 +60,7 @@ public class Queen extends Piece {
             else break;
         }
 //up
-        for (int a = x; a > 0; a--) {
+        for (int a = x; a >= 0; a--) {
             if (valid(squares, a, y, userOwnership))
                 valid_moves.add(squares[a][y]);
             else break;
@@ -71,30 +71,56 @@ public class Queen extends Piece {
                 valid_moves.add(squares[x][a]);
             else break;
         }
+        
 //diagonal up left
-        for (int a = y, b = x; a < maxY && b >= 0; a++, b--) {
-            if (valid(squares, b, a, userOwnership))
+        for (int a = y-1, b = x-1; a >=0 && b >= 0; a--, b--) {
+            if ( valid(squares, b, a, userOwnership))
                 valid_moves.add(squares[b][a]);
             else break;
+           
         }
 //diagonal right down
-        for (int a = y, b = x; a >= 0 && b < maxX; a--, b++) {
-            if (valid(squares, b, a, userOwnership))
+        for (int a = y+1, b = x+1; a < maxY && b < maxX; a++, b++) {
+            if ( valid(squares, b, a, userOwnership))
                 valid_moves.add(squares[b][a]);
             else break;
         }
 //diagonal up right 
-        for (int a = y, b = x; a >= 0 && b >= 0; a--, b--) {
-            if (valid(squares, b, a, userOwnership))
+        for (int a = y+1, b = x-1; a < maxY && b >= 0; a++, b--) {
+            if ( valid(squares, b, a, userOwnership))
                 valid_moves.add(squares[b][a]);
             else break;
         }
 //diagonal down left
-        for (int a = y, b = x; a < maxY && b < maxX; a++, b++) {
-            if (valid(squares, b, a, userOwnership))
+        for (int a = y-1, b = x+1; a >=0 && b < maxX; a--, b++) {
+            if ( valid(squares, b, a, userOwnership))
                 valid_moves.add(squares[b][a]);
             else break;
         }
+////diagonal up left
+//        for (int a = y, b = x; a < maxY && b >= 0; a++, b--) {
+//            if (valid(squares, b, a, userOwnership))
+//                valid_moves.add(squares[b][a]);
+//            else break;
+//        }
+////diagonal right down
+//        for (int a = y, b = x; a >= 0 && b < maxX; a--, b++) {
+//            if (valid(squares, b, a, userOwnership))
+//                valid_moves.add(squares[b][a]);
+//            else break;
+//        }
+////diagonal up right 
+//        for (int a = y, b = x; a >= 0 && b >= 0; a--, b--) {
+//            if (valid(squares, b, a, userOwnership))
+//                valid_moves.add(squares[b][a]);
+//            else break;
+//        }
+////diagonal down left
+//        for (int a = y, b = x; a < maxY && b < maxX; a++, b++) {
+//            if (valid(squares, b, a, userOwnership))
+//                valid_moves.add(squares[b][a]);
+//            else break;
+//        }
 
         return valid_moves;
     }

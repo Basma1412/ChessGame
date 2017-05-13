@@ -44,28 +44,29 @@ public class Bishop  extends Piece{
 
         ArrayList<Square> valid_moves = new ArrayList<>();
  //diagonal up left
-        for (int a = y, b = x; a < maxY && b >= 0; a++, b--) {
+        for (int a = y-1, b = x-1; a >=0 && b >= 0; a--, b--) {
             if ( valid(squares, b, a, userOwnership))
                 valid_moves.add(squares[b][a]);
+            else break;
            
         }
 //diagonal right down
-        for (int a = y, b = x; a >= 0 && b < maxX; a--, b++) {
+        for (int a = y+1, b = x+1; a < maxY && b < maxX; a++, b++) {
             if ( valid(squares, b, a, userOwnership))
                 valid_moves.add(squares[b][a]);
-          
+            else break;
         }
 //diagonal up right 
-        for (int a = y, b = x; a >= 0 && b >= 0; a--, b--) {
+        for (int a = y+1, b = x-1; a < maxY && b >= 0; a++, b--) {
             if ( valid(squares, b, a, userOwnership))
                 valid_moves.add(squares[b][a]);
-         
+            else break;
         }
 //diagonal down left
-        for (int a = y, b = x; a < maxY && b < maxX; a++, b++) {
+        for (int a = y-1, b = x+1; a >=0 && b < maxX; a--, b++) {
             if ( valid(squares, b, a, userOwnership))
                 valid_moves.add(squares[b][a]);
-            
+            else break;
         }
 
         return valid_moves;
