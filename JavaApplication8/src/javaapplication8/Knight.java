@@ -12,7 +12,15 @@ import java.util.ArrayList;
  * @author Basma Mohamed
  */
 public class Knight extends Piece {
-
+ 
+    public Knight()
+    {
+        this.name="Knight";
+    }
+    public String getColor()
+    {
+        return this.col;
+    }
     public void setBlack() {
         this.image = "..\\pictures\\black\\knight.png";
     }

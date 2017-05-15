@@ -13,6 +13,16 @@ import java.util.ArrayList;
  */
 public class King extends Piece {
 
+    public King()
+    {
+        this.name="King";
+    }
+    public String getColor()
+    {
+        return this.col;
+    }
+    
+    
 //    public int setNum(String num) {
 //        String temp = num.concat("5");
 //        int hh = Integer.parseInt(temp);

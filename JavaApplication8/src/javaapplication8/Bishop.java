@@ -14,7 +14,14 @@ import java.util.ArrayList;
 public class Bishop  extends Piece{
 
  
-    
+    public Bishop()
+    {
+        this.name="Bishop";
+    }
+    public String getColor()
+    {
+        return this.col;
+    }
     public void setBlack()
     {
         this.image="..\\pictures\\black\\bishop.png";
