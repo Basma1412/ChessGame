@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public abstract class Piece {
 
-    String col;
-    String name;
+    protected String col;
+    protected String name;
     protected int x;
     protected int y;
     protected int piecenumber;
@@ -45,7 +45,10 @@ public abstract class Piece {
 
         this.userOwnership = false;
     }
-
+    public String getName()
+    { 
+        return this.name;
+    }
     public boolean valid(Square squares[][], int a, int b, boolean temp) {
         Piece pieceonSquare = squares[a][b].getPiece();
         if (pieceonSquare == null) {

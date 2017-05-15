@@ -29,7 +29,7 @@ public class Knight extends Piece {
     public void setWhite() {
         this.image = "..\\pictures\\white\\knight.png";
     }
-
+    
     @Override
     public ArrayList<Square> getValidMoves(Square[][] squares, Location current_location) {
         int x = current_location.getI();
