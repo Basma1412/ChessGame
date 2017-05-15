@@ -10,10 +10,7 @@ public class Pawn extends Piece {
     {
         this.name="Pawn";
     }
-    public String getColor()
-    {
-        return this.col;
-    }
+   
     public void setBlack() {
         this.image = "..\\pictures\\black\\pawn.png";
     }

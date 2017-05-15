@@ -20,6 +20,11 @@ public abstract class Piece {
 //        ss.setGame();
 //    }
 //    
+  
+    public String getColor()
+    {
+        return this.col;
+    }
     public void setPieceToUser() {
         this.userOwnership = true;
     }

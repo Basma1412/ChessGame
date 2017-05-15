@@ -17,10 +17,6 @@ public class Knight extends Piece {
     {
         this.name="Knight";
     }
-    public String getColor()
-    {
-        return this.col;
-    }
     public void setBlack() {
         this.image = "..\\pictures\\black\\knight.png";
     }

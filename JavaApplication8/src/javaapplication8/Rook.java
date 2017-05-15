@@ -13,14 +13,11 @@ import java.util.ArrayList;
  */
 public class Rook  extends Piece {
 
-     public Rook()
+    public Rook()
     {
         this.name="Rook";
     }
-    public String getColor()
-    {
-        return this.col;
-    }
+   
     
     public void setBlack()
     {

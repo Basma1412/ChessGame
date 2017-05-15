@@ -91,7 +91,7 @@ public class Evaluation {
         {-10,  0,  5,  0,  0,  0,  0,-10},
         {-20,-10,-10, -5, -5,-10,-10,-20}};
     
-       private int queenBoardMachine[][]={
+    private int queenBoardMachine[][]={
         {-20,-10,-10, -5, -5,-10,-10,-20},
         {-10,  0,  5,  0,  0,  0,  0,-10},
         {-10,  5,  5,  5,  5,  5,  0,-10},

@@ -18,10 +18,7 @@ public class Bishop  extends Piece{
     {
         this.name="Bishop";
     }
-    public String getColor()
-    {
-        return this.col;
-    }
+   
     public void setBlack()
     {
         this.image="..\\pictures\\black\\bishop.png";

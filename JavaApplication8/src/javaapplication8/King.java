@@ -17,10 +17,7 @@ public class King extends Piece {
     {
         this.name="King";
     }
-    public String getColor()
-    {
-        return this.col;
-    }
+    
     
     
 //    public int setNum(String num) {

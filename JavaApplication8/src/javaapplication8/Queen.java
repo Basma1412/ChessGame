@@ -13,14 +13,11 @@ import java.util.ArrayList;
  */
 public class Queen extends Piece {
 
-     public Queen()
+    public Queen()
     {
         this.name="Queen";
     }
-    public String getColor()
-    {
-        return this.col;
-    }
+   
     public void setBlack() {
         this.image = "..\\pictures\\black\\queen.png";
     }
