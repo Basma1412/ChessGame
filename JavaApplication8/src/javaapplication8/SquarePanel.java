@@ -8,8 +8,36 @@ import static java.lang.Math.max;
 import static java.lang.Math.max;
 import static java.lang.Math.max;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+class Move {
+
+    Square square;
+    ArrayList<Square> validMoves;
+
+    public Move(Square square, ArrayList<Square> validMoves) {
+        this.square = square;
+        this.validMoves = validMoves;
+    }
+
+    public void setValidMoves(ArrayList<Square> s) {
+        validMoves = s;
+    }
+
+    public void setSquare(Square s) {
+        square = s;
+    }
+
+    public ArrayList<Square> getValidMoves() {
+        return this.validMoves;
+    }
+
+    public Square setSquare() {
+        return this.square;
+    }
+}
 
 class Location {
 
@@ -79,7 +107,8 @@ final class SquarePanel extends JPanel {
     boolean valid = false;
     public int[][] SquresWithNumbers = new int[8][8];
     static boolean active = true;
-    static boolean machineturn=false;
+    static boolean machineturn = false;
+    Square randomSquare = null;
 
     public static void setActive(boolean active) {
         SquarePanel.active = active;
@@ -271,31 +300,102 @@ final class SquarePanel extends JPanel {
     }
 
     public void playComputer() {
-        machineturn=true;
+        machineturn = true;
         System.out.println("I am the computer");
+        boolean finished = false;
+        Square move = getMove();
+        if (move == null) {
+            System.out.println("Finished 2 ");
+            Container contain;
+            JPanel reChange, reChange2;
+            JButton reChangeButton;
+            contain = this;
+            contain.removeAll();
+            contain.setLayout(null);
+
+            JLabel image = new JLabel(new ImageIcon("..\\pictures\\win.jpg"));
+            image.setSize(1000, 1000);
+
+            contain.add(image);
+            validate();
+            repaint();
+            setVisible(true);
+
+            finished = true;
+
+        } else {
+
+            Piece destinationPiece = randomSquare.getPiece();
+            String jj = randomSquare.piece.image;
+            setPieceOnSquare(randomSquare, null);
+            setPieceOnSquare(move, destinationPiece);
+            System.out.println("Piece number: " + jj + " jumped From [" + randomSquare.a + ", " + randomSquare.b + "] To [" + +move.a + ", " + move.b + "]");
+            setActive(true);
+
+        }
+
+    }
+
+    public ArrayList<Square> getValidSquares() {
+
+        ArrayList<Square> computerSquares = new ArrayList<>();
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+
+                Piece temp = squares[i][j].getPiece();
+                if (!(temp == null) && !temp.userOwnership) {
+                    computerSquares.add(squares[i][j]);
+                }
+            }
+        }
+
+        int length = computerSquares.size();
+
+        if (length == 0) {
+            System.out.println("Finished");
+            return null;
+        } else {
+//            int randomIndex = ThreadLocalRandom.current().nextInt(0, length);
+//            Square destination = computerSquares.get(randomIndex);
+
+            return computerSquares;
+        }
+    }
+
+    public ArrayList<Move> getAllPiecesValidMoves() {
+        ArrayList<Square> validSquares = getValidSquares();
+        if (validSquares == null) {
+            return null;
+        }
+        ArrayList<Move> getMoves = new ArrayList<>();
+        for (Square validSquare : validSquares) {
+
+            int squareA = validSquare.a;
+            int squareB = validSquare.b;
+            Piece chosenPiece = validSquare.piece;
+            ArrayList<Square> pieceMoves = chosenPiece.getValidMoves(squares, new Location(squareA, squareB));
+            if (pieceMoves.isEmpty())
+            {
+                continue;
+            }
+            Move move = new Move(validSquare, pieceMoves);
+            getMoves.add(move);
+
+        }
+        return getMoves;
+    }
+
+    public Square getMove() {
+        
+       ArrayList<Move> test = getAllPiecesValidMoves();
+        
         boolean finished = false;
         while (true) {
             ArrayList<Square> temp = getComputerValidMoves();
             if (temp == null) {
-                System.out.println("Finished 2 ");
 
-                Container contain;
-                JPanel reChange, reChange2;
-                JButton reChangeButton;
-                contain = this;
-                contain.removeAll();
-                contain.setLayout(null);
-
-                JLabel image = new JLabel(new ImageIcon("..\\pictures\\win.jpg"));
-                image.setSize(1000, 1000);
-
-                contain.add(image);
-                validate();
-                repaint();
-                setVisible(true);
-
-                finished = true;
-                break;
+                return null;
             } else {
                 if (!temp.isEmpty()) {
                     computerValidMoves = temp;
@@ -303,24 +403,14 @@ final class SquarePanel extends JPanel {
                 }
             }
         }
-        if (!finished) {
-            int length = computerValidMoves.size();
 
-            Random ran = new Random();
+        int length = computerValidMoves.size();
+        Random ran = new Random();
+        int randomNum = ran.nextInt(length);
+        Square destination = computerValidMoves.get(randomNum);
+        return destination;
 
-            int randomNum = ran.nextInt(length);
-
-            Square destination = computerValidMoves.get(randomNum);
-            Piece destinationPiece = randomSquare.getPiece();
-            String jj = randomSquare.piece.image;
-            setPieceOnSquare(randomSquare, null);
-            setPieceOnSquare(destination, destinationPiece);
-            System.out.println("Piece number: " + jj + " jumped From [" + randomSquare.a + ", " + randomSquare.b + "] To [" + +destination.a + ", " + destination.b + "]");
-            setActive(true);
-        }
     }
-
-    Square randomSquare = null;
 
     public ArrayList<Square> getComputerValidMoves() {
         ArrayList<Square> getMoves;
@@ -365,7 +455,7 @@ final class SquarePanel extends JPanel {
     }
 
     public void playUser() {
-        machineturn=false;
+        machineturn = false;
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
