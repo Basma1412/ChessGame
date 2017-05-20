@@ -4,11 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static java.lang.Math.max;
-import static java.lang.Math.max;
-import static java.lang.Math.max;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -97,6 +93,7 @@ final class SquarePanel extends JPanel {
 
     public Square[][] squares = new Square[8][8];
     String Col;
+    String difficulty;
     static boolean old = false;
     static Piece nIcon;
     static Piece temp;
@@ -292,8 +289,9 @@ final class SquarePanel extends JPanel {
         squares[iold][jold].setIcon(null);
     }
 
-    public SquarePanel(String Col) {
+    public SquarePanel(String Col, String difficulty) {
 
+        this.difficulty = difficulty;
         resetBoard(Col);
         playGame();
 
@@ -375,8 +373,7 @@ final class SquarePanel extends JPanel {
             int squareB = validSquare.b;
             Piece chosenPiece = validSquare.piece;
             ArrayList<Square> pieceMoves = chosenPiece.getValidMoves(squares, new Location(squareA, squareB));
-            if (pieceMoves.isEmpty())
-            {
+            if (pieceMoves.isEmpty()) {
                 continue;
             }
             Move move = new Move(validSquare, pieceMoves);
@@ -386,10 +383,64 @@ final class SquarePanel extends JPanel {
         return getMoves;
     }
 
+    
+    
+    
+      public ArrayList<Square> getStateValidSquares(Square[][] stateSquares) {
+
+        ArrayList<Square> computerSquares = new ArrayList<>();
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+
+                Piece temp = stateSquares[i][j].getPiece();
+                if (!(temp == null) && !temp.userOwnership) {
+                    computerSquares.add(stateSquares[i][j]);
+                }
+            }
+        }
+
+        int length = computerSquares.size();
+
+        if (length == 0) {
+            System.out.println("Finished");
+            return null;
+        } else {
+//            int randomIndex = ThreadLocalRandom.current().nextInt(0, length);
+//            Square destination = computerSquares.get(randomIndex);
+
+            return computerSquares;
+        }
+    }
+    
+    
+      public ArrayList<Move> getStateValidMoves(Square[][] stateSquares) {
+        ArrayList<Square> validSquares = getStateValidSquares(stateSquares);
+        if (validSquares == null) {
+            return null;
+        }
+        ArrayList<Move> getMoves = new ArrayList<>();
+        for (Square validSquare : validSquares) {
+
+            int squareA = validSquare.a;
+            int squareB = validSquare.b;
+            Piece chosenPiece = validSquare.piece;
+            ArrayList<Square> pieceMoves = chosenPiece.getValidMoves(stateSquares, new Location(squareA, squareB));
+            if (pieceMoves.isEmpty()) {
+                continue;
+            }
+            Move move = new Move(validSquare, pieceMoves);
+            getMoves.add(move);
+
+        }
+        return getMoves;
+    }
+    
+    
     public Square getMove() {
-        
-       ArrayList<Move> test = getAllPiecesValidMoves();
-        
+
+        ArrayList<Move> test = getAllPiecesValidMoves();
+
         boolean finished = false;
         while (true) {
             ArrayList<Square> temp = getComputerValidMoves();

@@ -9,14 +9,14 @@ class Board extends JFrame {
     SquarePanel panl;
   
 
-    public Board(String Col) {
+    public Board(String Col,String difficulty) {
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         setBounds(0, 0, dim.width/2, dim.width/2);
         this.setLocationRelativeTo(null);
         Container c = this.getContentPane(); 
-        panl = new SquarePanel(Col);
+        panl = new SquarePanel(Col,difficulty);
         c.add(panl);
 
     }
