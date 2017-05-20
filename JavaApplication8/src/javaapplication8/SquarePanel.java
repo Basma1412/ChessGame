@@ -361,7 +361,7 @@ final class SquarePanel extends JPanel {
         }
     }
 
-    public ArrayList<Move> getAllPiecesValidMoves() {
+    public ArrayList<Move> getAllComputerValidMoves() {
         ArrayList<Square> validSquares = getValidSquares();
         if (validSquares == null) {
             return null;
@@ -382,6 +382,67 @@ final class SquarePanel extends JPanel {
         }
         return getMoves;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    public ArrayList<Square> getUserValidSquares() {
+
+        ArrayList<Square> computerSquares = new ArrayList<>();
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+
+                Piece temp = squares[i][j].getPiece();
+                if (!(temp == null) && temp.userOwnership) {
+                    computerSquares.add(squares[i][j]);
+                }
+            }
+        }
+
+        int length = computerSquares.size();
+
+        if (length == 0) {
+            System.out.println("Finished");
+            return null;
+        } else {
+
+            return computerSquares;
+        }
+    }
+    
+    
+    
+    public ArrayList<Move> getAllUserValidMoves() {
+        ArrayList<Square> validSquares = getUserValidSquares();
+        if (validSquares == null) {
+            return null;
+        }
+        ArrayList<Move> getMoves = new ArrayList<>();
+        for (Square validSquare : validSquares) {
+
+            int squareA = validSquare.a;
+            int squareB = validSquare.b;
+            Piece chosenPiece = validSquare.piece;
+            ArrayList<Square> pieceMoves = chosenPiece.getValidMoves(squares, new Location(squareA, squareB));
+            if (pieceMoves.isEmpty()) {
+                continue;
+            }
+            Move move = new Move(validSquare, pieceMoves);
+            getMoves.add(move);
+
+        }
+        return getMoves;
+    }
+    
+    
+    
+    
+    
 
     
     
@@ -439,7 +500,7 @@ final class SquarePanel extends JPanel {
     
     public Square getMove() {
 
-        ArrayList<Move> test = getAllPiecesValidMoves();
+        ArrayList<Move> test = getAllComputerValidMoves();
 
         boolean finished = false;
         while (true) {
