@@ -327,11 +327,40 @@ final class SquarePanel extends JPanel {
             String jj = randomSquare.piece.image;
             setPieceOnSquare(randomSquare, null);
             setPieceOnSquare(move, destinationPiece);
+//            updateState(squares,randomSquare,move);
             System.out.println("Piece number: " + jj + " jumped From [" + randomSquare.a + ", " + randomSquare.b + "] To [" + +move.a + ", " + move.b + "]");
             setActive(true);
 
         }
 
+    }
+
+    public void setStatePieceOnSquare(Square[][] squares, Square square, Piece piece) {
+        int a = square.a;
+        int b = square.b;
+        Square stateSquare = squares[a][b];
+        stateSquare.setPiece(piece);
+        if (piece != null) {
+            square.setIcon(new ImageIcon(piece.getImage()));
+        } else {
+            square.setIcon(null);
+        }
+    }
+
+    public Square[][] updateState(Square[][] stateSquares, Square source, Square destination) {
+        int a = source.a;
+        int b = source.b;
+        Square stateSource = stateSquares[a][b];
+
+        int aa = destination.a;
+        int bb = destination.b;
+        Square stateDestination = stateSquares[aa][bb];
+        
+        Piece destinationPiece = stateSource.getPiece();
+        setStatePieceOnSquare(stateSquares,stateSource, null);
+        setStatePieceOnSquare(stateSquares,stateDestination, destinationPiece);
+        
+        return stateSquares;
     }
 
     public ArrayList<Square> getValidSquares() {
@@ -382,14 +411,7 @@ final class SquarePanel extends JPanel {
         }
         return getMoves;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
     public ArrayList<Square> getUserValidSquares() {
 
         ArrayList<Square> computerSquares = new ArrayList<>();
@@ -414,9 +436,7 @@ final class SquarePanel extends JPanel {
             return computerSquares;
         }
     }
-    
-    
-    
+
     public ArrayList<Move> getAllUserValidMoves() {
         ArrayList<Square> validSquares = getUserValidSquares();
         if (validSquares == null) {
@@ -438,16 +458,8 @@ final class SquarePanel extends JPanel {
         }
         return getMoves;
     }
-    
-    
-    
-    
-    
 
-    
-    
-    
-      public ArrayList<Square> getStateValidSquares(Square[][] stateSquares) {
+    public ArrayList<Square> getStateValidSquares(Square[][] stateSquares) {
 
         ArrayList<Square> computerSquares = new ArrayList<>();
 
@@ -467,15 +479,11 @@ final class SquarePanel extends JPanel {
             System.out.println("Finished");
             return null;
         } else {
-//            int randomIndex = ThreadLocalRandom.current().nextInt(0, length);
-//            Square destination = computerSquares.get(randomIndex);
-
             return computerSquares;
         }
     }
-    
-    
-      public ArrayList<Move> getStateValidMoves(Square[][] stateSquares) {
+
+    public ArrayList<Move> getStateValidMoves(Square[][] stateSquares) {
         ArrayList<Square> validSquares = getStateValidSquares(stateSquares);
         if (validSquares == null) {
             return null;
@@ -496,8 +504,7 @@ final class SquarePanel extends JPanel {
         }
         return getMoves;
     }
-    
-    
+
     public Square getMove() {
 
         ArrayList<Move> test = getAllComputerValidMoves();
