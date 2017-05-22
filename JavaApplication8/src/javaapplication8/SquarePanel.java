@@ -8,6 +8,44 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+
+
+class Route
+{
+    Square source;
+    Square destination;
+    
+    public Route(Square source,Square destination)
+    {
+        this.source=source;
+        this.destination=destination;
+    }
+    
+    public void setSource(Square source)
+    {
+                this.source=source;
+
+    }
+    
+    
+    public void setdestination(Square destination)
+    {
+                this.destination=destination;
+
+    }
+    
+    public Square getSource()
+    {
+        return this.source;
+    }
+    
+    
+    public Square getDestination()
+    {
+        return this.destination;
+    }
+}
+
 class Move {
 
     Square square;
@@ -325,9 +363,10 @@ final class SquarePanel extends JPanel {
 
             Piece destinationPiece = randomSquare.getPiece();
             String jj = randomSquare.piece.image;
-            setPieceOnSquare(randomSquare, null);
-            setPieceOnSquare(move, destinationPiece);
-//            updateState(squares,randomSquare,move);
+//            setPieceOnSquare(randomSquare, null);
+//            setPieceOnSquare(move, destinationPiece);
+            Route route = new Route(randomSquare, move);
+            updateState(squares,route);
             System.out.println("Piece number: " + jj + " jumped From [" + randomSquare.a + ", " + randomSquare.b + "] To [" + +move.a + ", " + move.b + "]");
             setActive(true);
 
@@ -347,7 +386,9 @@ final class SquarePanel extends JPanel {
         }
     }
 
-    public Square[][] updateState(Square[][] stateSquares, Square source, Square destination) {
+    public Square[][] updateState(Square[][] stateSquares,Route route) {
+         Square source = route.source;
+         Square destination=route.destination;
         int a = source.a;
         int b = source.b;
         Square stateSource = stateSquares[a][b];
